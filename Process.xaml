@@ -1,12 +1,13 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(s:String[])" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_ParametersDT" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>559,1621</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>559,2267</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -31,6 +32,7 @@
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -56,7 +58,7 @@
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="539,1561" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="539,2207" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="simCode" />
       <Variable x:TypeArguments="s:String[]" Name="array_simsID" />
@@ -73,9 +75,17 @@
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
+    <Assign DisplayName="Assign Para primeiro diferimento" sap:VirtualizedContainerService.HintSize="497,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[simCode]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">1</InArgument>
+      </Assign.Value>
+    </Assign>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AS400_Process_Sims workflow" sap:VirtualizedContainerService.HintSize="497,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="AS400_Process_Sims.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[1]</InOutArgument>
+        <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[simCode]</InOutArgument>
         <InArgument x:TypeArguments="s:String[]" x:Key="in_TransactionItem" />
         <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ParametersDT" />
         <OutArgument x:TypeArguments="x:String" x:Key="out_SimID">[simID]</OutArgument>
@@ -116,21 +126,29 @@
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[simCode]" sap:VirtualizedContainerService.HintSize="497,293" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[simCode]" sap:VirtualizedContainerService.HintSize="497,839" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <Throw Exception="[new BusinessRuleException(&quot;The interest rate must be higher than 0.&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
       </Switch.Default>
-      <Sequence x:Key="2" sap:VirtualizedContainerService.HintSize="376,433" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence x:Key="2" sap:VirtualizedContainerService.HintSize="376,633" sap2010:WorkflowViewState.IdRef="Sequence_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
+        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[simCode]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">2</InArgument>
+          </Assign.Value>
+        </Assign>
         <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AS400_Process_Sims workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="AS400_Process_Sims.xaml">
           <ui:InvokeWorkflowFile.Arguments>
-            <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[2]</InOutArgument>
-            <InArgument x:TypeArguments="s:String[]" x:Key="in_TransactionItem" />
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ParametersDT" />
+            <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[simCode]</InOutArgument>
+            <InArgument x:TypeArguments="s:String[]" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ParametersDT">[in_ParametersDT]</InArgument>
             <OutArgument x:TypeArguments="x:String" x:Key="out_SimID">[simID]</OutArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
@@ -139,18 +157,26 @@
             <scg:Dictionary x:TypeArguments="x:String, Argument" />
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
+        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[simCode]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">3</InArgument>
+          </Assign.Value>
+        </Assign>
         <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AS400_Process_Sims workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="AS400_Process_Sims.xaml">
           <ui:InvokeWorkflowFile.Arguments>
-            <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[3]</InOutArgument>
-            <InArgument x:TypeArguments="s:String[]" x:Key="in_TransactionItem" />
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ParametersDT" />
+            <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[simCode]</InOutArgument>
+            <InArgument x:TypeArguments="s:String[]" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ParametersDT">[in_ParametersDT]</InArgument>
             <OutArgument x:TypeArguments="x:String" x:Key="out_SimID">[simID]</OutArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
       </Sequence>
       <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" x:Key="3" DisplayName="Invoke AS400_Process_Sims workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="AS400_Process_Sims.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[3]</InOutArgument>
+          <InOutArgument x:TypeArguments="x:Int32" x:Key="io_SimCode">[simCode]</InOutArgument>
           <InArgument x:TypeArguments="s:String[]" x:Key="in_TransactionItem" />
           <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ParametersDT" />
           <OutArgument x:TypeArguments="x:String" x:Key="out_SimID">[simID]</OutArgument>
@@ -159,7 +185,8 @@
     </Switch>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SALESFORCE_Fill_IDSAndUser workflow" sap:VirtualizedContainerService.HintSize="497,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="SALESFORCE_Fill_IDSAndUser.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        <InArgument x:TypeArguments="s:String[]" x:Key="in_SimsID">[array_simsID]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_User">[in_Config("User Rpa").ToString]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Get_Attachments workflow" sap:VirtualizedContainerService.HintSize="497,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Get_Attachments.xaml">
