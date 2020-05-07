@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>742.666666666667,2072</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>747,1312</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SALESFORCE_Fill_IDSAndUser_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="21">
@@ -56,7 +56,7 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="@Inputs: &#xD;&#xA;      in_SimsID &lt;String[]&gt;&#xD;&#xA;      in_User &lt;String&gt;&#xD;&#xA;&#xD;&#xA;Observações: in_User guardado em Conﬁg (user rpa)" DisplayName="SALESFORCE_Fill_IDSAndUser" sap:VirtualizedContainerService.HintSize="722.666666666667,1972" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="@Inputs: &#xA;      in_SimsID &lt;String[]&gt;&#xA;      in_User &lt;String&gt;&#xA;&#xA;Observações: in_User guardado em Conﬁg (user rpa)" DisplayName="SALESFORCE_Fill_IDSAndUser" sap:VirtualizedContainerService.HintSize="476,1147" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="index_simsID" />
     </Sequence.Variables>
@@ -66,80 +66,21 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="680.666666666667,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[&quot;Alterar os selectors&quot;]" />
-    <ui:Comment sap:VirtualizedContainerService.HintSize="680.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Está a ser feita a validação se o ID de simulação é vazio. Caso seja, estou a substituir o valor por N/A." />
-    <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'ApplicationFrameHost.ex...'" sap:VirtualizedContainerService.HintSize="680.666666666667,1520" sap2010:WorkflowViewState.IdRef="WindowScope_2">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[&quot;Alterar os selectors&quot;]" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="434,93" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Está a ser feita a validação se o ID de simulação é vazio. Caso seja, estou a substituir o valor por N/A." />
+    <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'ApplicationFrameHost.ex...'" sap:VirtualizedContainerService.HintSize="434,704" sap2010:WorkflowViewState.IdRef="WindowScope_2">
       <ui:WindowScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="646.666666666667,1412" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,596" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Sequence sap2010:Annotation.AnnotationText="Se não existir o valor do ID de simulação, vai subsituir esse valor por N/A, dado que é obrigatório todos os campos ID simulação estarem preenchidos no Salesforce" DisplayName="Substituição do valor vazio por N/A" sap:VirtualizedContainerService.HintSize="604.666666666667,776" sap2010:WorkflowViewState.IdRef="Sequence_14">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <Assign DisplayName="Assign: index_simsID" sap:VirtualizedContainerService.HintSize="562.666666666667,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_16">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:Int32">[index_simsID]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:Int32">0</InArgument>
-                </Assign.Value>
-              </Assign>
-              <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each: ID de simulação" sap:VirtualizedContainerService.HintSize="562.666666666667,538.666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[in_SimsID]">
-                <ui:ForEach.Body>
-                  <ActivityAction x:TypeArguments="x:String">
-                    <ActivityAction.Argument>
-                      <DelegateInArgument x:TypeArguments="x:String" Name="simID" />
-                    </ActivityAction.Argument>
-                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,404" sap2010:WorkflowViewState.IdRef="Sequence_13">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                      <If Condition="[String.IsNullOrEmpty(simID)]" DisplayName="If: Verifica se o ID de simulação é vazio e substitui por N/A" sap:VirtualizedContainerService.HintSize="484,210.666666666667" sap2010:WorkflowViewState.IdRef="If_4">
-                        <If.Then>
-                          <Assign DisplayName="Assign: in_SimsID(index_simsID)" sap:VirtualizedContainerService.HintSize="262,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_14">
-                            <Assign.To>
-                              <OutArgument x:TypeArguments="x:String">[in_SimsID(index_simsID)]</OutArgument>
-                            </Assign.To>
-                            <Assign.Value>
-                              <InArgument x:TypeArguments="x:String">N/A</InArgument>
-                            </Assign.Value>
-                          </Assign>
-                        </If.Then>
-                      </If>
-                      <Assign sap:VirtualizedContainerService.HintSize="484,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_15">
-                        <Assign.To>
-                          <OutArgument x:TypeArguments="x:Int32">[index_simsID]</OutArgument>
-                        </Assign.To>
-                        <Assign.Value>
-                          <InArgument x:TypeArguments="x:Int32">[index_simsID + 1]</InArgument>
-                        </Assign.Value>
-                      </Assign>
-                    </Sequence>
-                  </ActivityAction>
-                </ui:ForEach.Body>
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-              </ui:ForEach>
-            </Sequence>
-            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: ID Simulação DIF1" sap:VirtualizedContainerService.HintSize="604.666666666667,96" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[in_SimsID(0)]">
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: ID Simulação DIF1" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[in_SimsID(0)]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
                   <ui:Target.TimeoutMS>
@@ -151,7 +92,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: ID Simulação DIF2" sap:VirtualizedContainerService.HintSize="604.666666666667,96" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[in_SimsID(1)]">
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: ID Simulação DIF2" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[in_SimsID(1)]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
                   <ui:Target.TimeoutMS>
@@ -163,7 +104,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: ID Simulação CUT" sap:VirtualizedContainerService.HintSize="604.666666666667,96" sap2010:WorkflowViewState.IdRef="TypeInto_3" Text="[in_SimsID(2)]">
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: ID Simulação CUT" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_3" Text="[in_SimsID(2)]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
                   <ui:Target.TimeoutMS>
@@ -175,7 +116,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: User simulação" sap:VirtualizedContainerService.HintSize="604.666666666667,96" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[in_User]">
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into: User simulação" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[in_User]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
                   <ui:Target.TimeoutMS>
