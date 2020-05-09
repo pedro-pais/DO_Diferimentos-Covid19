@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="AS400_NavigateTo_WorkWithLoanSubsystem" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1310,3159.33333333333" sap2010:WorkflowViewState.IdRef="AS400_NavigateTo_WorkWithLoanSubsystem_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="AS400_NavigateTo_WorkWithLoanSubsystem" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="688,1639.33333333333" sap2010:WorkflowViewState.IdRef="AS400_NavigateTo_WorkWithLoanSubsystem_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <sco:Collection x:TypeArguments="x:String">
+    <scg:List x:TypeArguments="x:String" Capacity="22">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -23,10 +23,10 @@
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Terminal</x:String>
-    </sco:Collection>
+    </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <sco:Collection x:TypeArguments="AssemblyReference">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="19">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -46,9 +46,9 @@
       <AssemblyReference>UiPath.Terminal.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Terminal</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
-    </sco:Collection>
+    </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AS400_NavigateTo_WorkWithLoanSubsystem" sap:VirtualizedContainerService.HintSize="1290,3099.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AS400_NavigateTo_WorkWithLoanSubsystem" sap:VirtualizedContainerService.HintSize="698,1534.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="menuAS400" />
     </Sequence.Variables>
@@ -57,217 +57,75 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Navegar para o menu Comprehensive" sap:VirtualizedContainerService.HintSize="1248,1439.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" sap2010:Annotation.AnnotationText="Navegar para o menu Comprehensive... " CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Menu Inicial" sap:VirtualizedContainerService.HintSize="1206,444" sap2010:WorkflowViewState.IdRef="TerminalSession_1" TimeoutMS="50000">
-        <uit:TerminalSession.Body>
-          <ActivityAction x:TypeArguments="uit:TerminalConnection">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
-            </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,314.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <uit:TerminalSendKeys DelayMS="300" DisplayName="Send Keys: 13" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_1" Keys="13" TimeoutMS="5000" WaitType="READY" />
-              <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_1" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-              <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="TerminalGetText_1" Text="[menuAS400]" TimeoutMS="5000" WaitType="READY" />
-            </Sequence>
-          </ActivityAction>
-        </uit:TerminalSession.Body>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </uit:TerminalSession>
-      <ui:Comment sap:VirtualizedContainerService.HintSize="1206,75.3333333333333" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Alterar o texto dentro do Contains e a mensagem do Log" />
-      <If Condition="[menuAS400.Contains(&quot;Comprehensive&quot;)]" DisplayName="If: Verifica se está no Menu Comprehensive" sap:VirtualizedContainerService.HintSize="1206,748" sap2010:WorkflowViewState.IdRef="If_1">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <If.Then>
-          <Sequence DisplayName="Sucesso" sap:VirtualizedContainerService.HintSize="376,185.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="656,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Navegar para o menu Comprehensive Banking System&quot;]" />
+    <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" sap2010:Annotation.AnnotationText="Navegar para o menu Comprehensive Banking System" CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Terminal Session" sap:VirtualizedContainerService.HintSize="656,1309.33333333333" sap2010:WorkflowViewState.IdRef="TerminalSession_10" TimeoutMS="50000">
+      <uit:TerminalSession.Body>
+        <ActivityAction x:TypeArguments="uit:TerminalConnection">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="622,1180" sap2010:WorkflowViewState.IdRef="Sequence_19">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="screenAS400Text" />
+            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Menu AS400: &quot;]" />
-          </Sequence>
-        </If.Then>
-        <If.Else>
-          <If Condition="[menuAS400.Contains(&quot;Menu Inicial&quot;)]" DisplayName="If: Verifica se está no Menu Inicial" sap:VirtualizedContainerService.HintSize="784,596" sap2010:WorkflowViewState.IdRef="If_3">
-            <If.Then>
-              <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" sap2010:Annotation.AnnotationText="Navegar para o menu Comprehensive... " CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Menu Inicial" sap:VirtualizedContainerService.HintSize="434,444" sap2010:WorkflowViewState.IdRef="TerminalSession_5" TimeoutMS="50000">
-                <uit:TerminalSession.Body>
-                  <ActivityAction x:TypeArguments="uit:TerminalConnection">
-                    <ActivityAction.Argument>
-                      <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
-                    </ActivityAction.Argument>
-                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,314.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_12">
+            <uit:TerminalSetField DelayMS="300" DisplayName="&quot;Definir Campo (13)&quot;" FollowedBy="F12=Sair" sap:VirtualizedContainerService.HintSize="580,114.666666666667" sap2010:WorkflowViewState.IdRef="TerminalSetField_5" Index="1" LabeledBy="Opção:" Text="13" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="580,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_14" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+            <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="580,22" sap2010:WorkflowViewState.IdRef="TerminalGetText_9" Text="[screenAS400Text]" TimeoutMS="5000" WaitType="READY" />
+            <If Condition="[screenAS400Text.Contains(&quot;Comprehensive Banking System&quot;)]" DisplayName="If: Verifica se está no menu Comprehensive Banking System" sap:VirtualizedContainerService.HintSize="580,636" sap2010:WorkflowViewState.IdRef="If_6">
+              <If.Else>
+                <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,486.666666666667" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                  <TryCatch.Try>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,308.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_21">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uit:TerminalSendKeys DelayMS="300" DisplayName="Send Keys: 13" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_3" Keys="13" TimeoutMS="5000" WaitType="READY" />
-                      <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_7" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-                      <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="TerminalGetText_5" Text="[menuAS400]" TimeoutMS="5000" WaitType="READY" />
+                      <uit:TerminalSetField DelayMS="300" DisplayName="&quot;Definir Campo (13)&quot;" FollowedBy="F12=Sair" sap:VirtualizedContainerService.HintSize="334,114.666666666667" sap2010:WorkflowViewState.IdRef="TerminalSetField_7" Index="1" LabeledBy="Opção:" Text="13" TimeoutMS="5000" WaitType="READY" />
+                      <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_16" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
                     </Sequence>
-                  </ActivityAction>
-                </uit:TerminalSession.Body>
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-              </uit:TerminalSession>
-            </If.Then>
-            <If.Else>
-              <Sequence DisplayName="Insucesso" sap:VirtualizedContainerService.HintSize="304,215.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <Assign DisplayName="Assign: menuAS400" sap:VirtualizedContainerService.HintSize="262,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_1">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:String">[menuAS400]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">
-                      <Literal x:TypeArguments="x:String" Value="" />
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <Throw DisplayName="Throw: Business Rule Exception" Exception="[New BusinessRuleException(&quot;Está num ecrã diferente do esperado.&quot;)]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
-              </Sequence>
-            </If.Else>
-          </If>
-        </If.Else>
-      </If>
-    </Sequence>
-    <Sequence DisplayName="Navegar para o menu Work With Loan Subsystem" sap:VirtualizedContainerService.HintSize="1248,1528" sap2010:WorkflowViewState.IdRef="Sequence_8">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" sap2010:Annotation.AnnotationText="Navegar para o menu Work With Loan Subsystem" CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Menu Comprehensive" sap:VirtualizedContainerService.HintSize="1206,546" sap2010:WorkflowViewState.IdRef="TerminalSession_3" TimeoutMS="50000">
-        <uit:TerminalSession.Body>
-          <ActivityAction x:TypeArguments="uit:TerminalConnection">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
-            </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,416.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <uit:TerminalSendKeys DelayMS="300" DisplayName="Send Keys: 5" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_2" Keys="5" TimeoutMS="5000" WaitType="READY" />
-              <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_3" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-              <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_4" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-              <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="TerminalGetText_3" Text="[menuAS400]" TimeoutMS="5000" WaitType="READY" />
-            </Sequence>
-          </ActivityAction>
-        </uit:TerminalSession.Body>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </uit:TerminalSession>
-      <If Condition="[menuAS400.Contains(&quot;Work With Loan Subsystem&quot;)]" DisplayName="If: Verifica se está no Menu Work With Loan Subsystem" sap:VirtualizedContainerService.HintSize="1206,850" sap2010:WorkflowViewState.IdRef="If_5">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <If.Then>
-          <Sequence DisplayName="Sucesso" sap:VirtualizedContainerService.HintSize="376,185.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_9">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Menu AS400: Work With Loan Subsystem&quot;]" />
-          </Sequence>
-        </If.Then>
-        <If.Else>
-          <If Condition="[menuAS400.Contains(&quot;Comprehensive&quot;)]" DisplayName="If: Verifica se está no Menu Comprehensive" sap:VirtualizedContainerService.HintSize="784,698" sap2010:WorkflowViewState.IdRef="If_4">
-            <If.Then>
-              <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" sap2010:Annotation.AnnotationText="Navegar para o menu Work With Loan Subsystem" CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Menu Comprehensive" sap:VirtualizedContainerService.HintSize="434,546" sap2010:WorkflowViewState.IdRef="TerminalSession_6" TimeoutMS="50000">
-                <uit:TerminalSession.Body>
-                  <ActivityAction x:TypeArguments="uit:TerminalConnection">
-                    <ActivityAction.Argument>
-                      <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
-                    </ActivityAction.Argument>
-                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,416.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,317.333333333333" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uit:TerminalSendKeys DelayMS="300" DisplayName="Send Keys: 5" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="TerminalSendKeys_4" Keys="5" TimeoutMS="5000" WaitType="READY" />
-                      <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_8" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-                      <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_9" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
-                      <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="TerminalGetText_6" Text="[menuAS400]" TimeoutMS="5000" WaitType="READY" />
-                    </Sequence>
-                  </ActivityAction>
-                </uit:TerminalSession.Body>
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-              </uit:TerminalSession>
-            </If.Then>
-            <If.Else>
-              <Sequence DisplayName="Insucesso" sap:VirtualizedContainerService.HintSize="304,215.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_11">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <Assign DisplayName="Assign: menuAS400" sap:VirtualizedContainerService.HintSize="262,61.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:String">[menuAS400]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">
-                      <Literal x:TypeArguments="x:String" Value="" />
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <Throw DisplayName="Throw: Business Rule Exception" Exception="[New BusinessRuleException(&quot;Está num ecrã diferente do esperado.&quot;)]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Throw_3" />
-              </Sequence>
-            </If.Else>
-          </If>
-        </If.Else>
-      </If>
-    </Sequence>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <Sequence sap:VirtualizedContainerService.HintSize="376,247.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Não conseguiu avançar para o menu Comprehensive Banking System.&quot;]" />
+                          <Throw DisplayName="Throw Business Rule Exception" Exception="[new BusinessRuleException(&quot;Não conseguiu avançar para o menu Comprehensive Banking System. &quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                        </Sequence>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                </TryCatch>
+              </If.Else>
+            </If>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="580,93.3333333333333" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Navegação efetuada com sucesso para o menu Comprehensive Banking System&quot;]" />
+          </Sequence>
+        </ActivityAction>
+      </uit:TerminalSession.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uit:TerminalSession>
   </Sequence>
 </Activity>
