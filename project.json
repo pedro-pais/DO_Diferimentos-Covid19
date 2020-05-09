@@ -3,8 +3,9 @@
   "description": "",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.Excel.Activities": "[2.7.2]",
-    "UiPath.System.Activities": "[20.4.0]",
+    "UiPath.Excel.Activities": "[2.8.5]",
+    "UiPath.PDF.Activities": "[3.2.2]",
+    "UiPath.System.Activities": "[19.10.1]",
     "UiPath.UIAutomation.Activities": "[19.11.2]"
   },
   "webServices": [],
@@ -29,7 +30,7 @@
       "includeOriginalXaml": false,
       "privateWorkflows": []
     },
-    "fileInfos": []
+    "fileInfoCollection": []
   },
   "expressionLanguage": "VisualBasic"
 }
