@@ -5,7 +5,7 @@
   "dependencies": {
     "UiPath.Excel.Activities": "[2.8.5]",
     "UiPath.PDF.Activities": "[3.2.2]",
-    "UiPath.System.Activities": "[19.10.1]",
+    "UiPath.System.Activities": "[20.4.0]",
     "UiPath.UIAutomation.Activities": "[19.11.2]"
   },
   "webServices": [],
