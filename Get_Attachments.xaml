@@ -1,16 +1,17 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Get_Attachments" this:Get_Attachments.in_mailBox="andre.r.silva@noesis.pt" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mewd="clr-namespace:Microsoft.Exchange.WebServices.Data;assembly=Microsoft.Exchange.WebServices" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upap="clr-namespace:UiPath.PDF.Activities.PDF;assembly=UiPath.PDF.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Get_Attachments" this:Get_Attachments.in_mailBox="andre.r.silva@noesis.pt" this:Get_Attachments.io_SimCode="1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_numberAttachments" Type="InArgument(x:Int32)" />
     <x:Property Name="in_mailBox" Type="InArgument(x:String)" />
-    <x:Property Name="out_Attachments" Type="InArgument(s:String[])" />
+    <x:Property Name="out_Attachments" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="io_SimCode" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1116.8,3045.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1214.4,4469.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Attachments_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="23">
+    <scg:List x:TypeArguments="x:String" Capacity="26">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -34,10 +35,13 @@
       <x:String>System.Windows.Markup</x:String>
       <x:String>Microsoft.Exchange.WebServices.Data</x:String>
       <x:String>UiPath.MicrosoftOffice365.Models</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.Graph</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="42">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="52">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -63,153 +67,248 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.CV</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.Graph</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_Attachments" sap:VirtualizedContainerService.HintSize="1127.2,2880.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <Sequence.Variables>
-      <Variable x:TypeArguments="snm:MailMessage" Name="mail" />
-      <Variable x:TypeArguments="snm:AttachmentCollection" Name="attachmentsList" />
-      <Variable x:TypeArguments="x:Int32" Name="Index" />
-      <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="mailList" />
-    </Sequence.Variables>
+  <Sequence sap:VirtualizedContainerService.HintSize="1224.8,4304.8" sap2010:WorkflowViewState.IdRef="Sequence_19">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ExchangeScope Domain="{x:Null}" EmailAutodiscover="{x:Null}" ExchangeService="{x:Null}" ExistingExchangeService="{x:Null}" Password="{x:Null}" Server="{x:Null}" TimeoutMS="{x:Null}" User="{x:Null}" DisplayName="Exchange Scope" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="1085.6,171.2" sap2010:WorkflowViewState.IdRef="ExchangeScope_1">
-      <ui:ExchangeScope.Body>
-        <ActivityAction x:TypeArguments="mewd:ExchangeService">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="mewd:ExchangeService" Name="ExchangeConnection" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="200,84.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </Sequence>
-        </ActivityAction>
-      </ui:ExchangeScope.Body>
-    </ui:ExchangeScope>
-    <If sap:VirtualizedContainerService.HintSize="1085.6,209.6" sap2010:WorkflowViewState.IdRef="If_3" />
-    <ui:GetOutlookMailMessages Filter="{x:Null}" TimeoutMS="{x:Null}" Top="{x:Null}" Account="[in_mailBox]" DisplayName="Get Outlook Mail Messages" GetAttachements="False" sap:VirtualizedContainerService.HintSize="1085.6,22.4" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="teste mails" MarkAsRead="True" Messages="[mailList]" OnlyUnreadMessages="True" />
-    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1085.6,2132" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[mailList]">
-      <ui:ForEach.Body>
-        <ActivityAction x:TypeArguments="snm:MailMessage">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="item" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1050.4,1997.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="x:String" Name="Attachement_number" />
-            </Sequence.Variables>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <Assign sap:VirtualizedContainerService.HintSize="1008.8,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-              <Assign.To>
-                <OutArgument x:TypeArguments="snm:MailMessage">[mail]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="snm:MailMessage">[item]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign sap:VirtualizedContainerService.HintSize="1008.8,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-              <Assign.To>
-                <OutArgument x:TypeArguments="snm:AttachmentCollection">[attachmentsList]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="snm:AttachmentCollection">[mail.Attachments]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <If Condition="[attachmentsList.Count.Equals(0)]" sap:VirtualizedContainerService.HintSize="1008.8,1704.8" sap2010:WorkflowViewState.IdRef="If_4">
-              <If.Then>
-                <Throw Exception="[new Exception(&quot;Erro. O email&quot; +mail.Sender.ToString+ &quot; não contém documentos anexados&quot;)]" sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="Throw_1" />
-              </If.Then>
-              <If.Else>
-                <ui:ForEach x:TypeArguments="snm:Attachment" CurrentIndex="[Index]" DisplayName="For each" sap:VirtualizedContainerService.HintSize="764.8,1555.2" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[attachmentsList]">
-                  <ui:ForEach.Body>
-                    <ActivityAction x:TypeArguments="snm:Attachment">
-                      <ActivityAction.Argument>
-                        <DelegateInArgument x:TypeArguments="snm:Attachment" Name="item" />
-                      </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="729.6,1420.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                        <If Condition="[index = 1]" sap:VirtualizedContainerService.HintSize="688,1050.4" sap2010:WorkflowViewState.IdRef="If_1">
-                          <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="544,900.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                              <Sequence.Variables>
-                                <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="Attachement" />
-                              </Sequence.Variables>
+    <Sequence DisplayName="Get_Attachments" sap:VirtualizedContainerService.HintSize="1183.2,4212" sap2010:WorkflowViewState.IdRef="Sequence_1">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="snm:MailMessage" Name="mail" />
+        <Variable x:TypeArguments="x:Int32" Name="attachmentsList" />
+        <Variable x:TypeArguments="x:Int32" Name="Index" />
+        <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="mailList" />
+        <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1141.6,268" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+        <TryCatch.Try>
+          <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get Outlook Mail Messages" GetAttachements="False" sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="Testes" MarkAsRead="True" Messages="[mailList]" OnlyUnreadMessages="True" Top="3" />
+        </TryCatch.Try>
+      </TryCatch>
+      <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1141.6,3678.4" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[mailList]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="snm:MailMessage">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="mail" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1106.4,3544" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="Attachement_number" />
+                <Variable x:TypeArguments="ui:Image" Name="screenshoot" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Save Attachments" Filter=".pdf" FolderPath="Anexo" sap:VirtualizedContainerService.HintSize="1064.8,88" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_3" Message="[mail]" />
+              <If Condition="[mail.Attachments.Count.Equals(0)]" sap:VirtualizedContainerService.HintSize="1064.8,3323.2" sap2010:WorkflowViewState.IdRef="If_4">
+                <If.Then>
+                  <Throw Exception="[new BusinessRuleException(&quot;Erro. O email&quot; +mail.Sender.ToString+ &quot; não contém documentos anexados&quot;)]" sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                </If.Then>
+                <If.Else>
+                  <Sequence sap:VirtualizedContainerService.HintSize="820.8,3173.6" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="Attachment" />
+                      <Variable x:TypeArguments="s:String[]" Name="file" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="779.2,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="s:String[]">[file]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="s:String[]">[System.io.Directory.GetFiles("Anexo")]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap:VirtualizedContainerService.HintSize="779.2,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[attachmentsList]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">[file.Length]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Sequence DisplayName="For Each File in Folder" sap:VirtualizedContainerService.HintSize="779.2,2880.8" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="selectFolder" />
+                        <Variable x:TypeArguments="s:String[]" Name="files" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="[Index]" DisplayName="For each file" sap:VirtualizedContainerService.HintSize="737.6,2788" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[file]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="x:String">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="702.4,2653.6" sap2010:WorkflowViewState.IdRef="Sequence_8">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:SaveMailAttachments Attachments="[Attachement]" DisplayName="Save Attachments" FolderPath="[out_Attachments]" sap:VirtualizedContainerService.HintSize="502.4,88" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[mail]" />
-                              <Sequence DisplayName="For Each File in Folder" sap:VirtualizedContainerService.HintSize="502.4,680" sap2010:WorkflowViewState.IdRef="Sequence_1">
-                                <Sequence.Variables>
-                                  <Variable x:TypeArguments="x:String" Name="selectFolder" />
-                                  <Variable x:TypeArguments="s:String[]" Name="files" />
-                                </Sequence.Variables>
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                                <Assign sap:VirtualizedContainerService.HintSize="460.8,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-                                  <Assign.To>
-                                    <OutArgument x:TypeArguments="s:String[]">[files]</OutArgument>
-                                  </Assign.To>
-                                  <Assign.Value>
-                                    <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("Anexos")]</InArgument>
-                                  </Assign.Value>
-                                </Assign>
-                                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For each file" sap:VirtualizedContainerService.HintSize="460.8,487.2" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[files]">
-                                  <ui:ForEach.Body>
-                                    <ActivityAction x:TypeArguments="x:String">
-                                      <ActivityAction.Argument>
-                                        <DelegateInArgument x:TypeArguments="x:String" Name="file" />
-                                      </ActivityAction.Argument>
-                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="425.6,352.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                        <upap:ExtractImagesFromPDF DisplayName="Extract Images From PDF" FileName="[file]" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="ExtractImagesFromPDF_1" OutputFolderName="Anexo" />
-                                        <ui:MoveFile ContinueOnError="{x:Null}" Destination="[Folder_Anexos+&quot;/Diferimento&quot;+i]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="384,160" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="False" Path="[Folder_Anexos]" />
-                                      </Sequence>
-                                    </ActivityAction>
-                                  </ui:ForEach.Body>
-                                </ui:ForEach>
-                              </Sequence>
+                              <If Condition="[Index=1]" sap:VirtualizedContainerService.HintSize="660.8,1709.6" sap2010:WorkflowViewState.IdRef="If_5">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="516.8,1560" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="x:String" Name="image_name" />
+                                      <Variable x:TypeArguments="x:String" Name="attachment_name" />
+                                      <Variable x:TypeArguments="x:String" Name="DataTable_Image" />
+                                    </Sequence.Variables>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="475.2,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[attachment_name]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[path.GetFileName(item)]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <Sequence DisplayName="Data Scraping" sap:VirtualizedContainerService.HintSize="475.2,920.8" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="[item]" sap:VirtualizedContainerService.HintSize="433.6,88" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
+                                      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey" sap:VirtualizedContainerService.HintSize="433.6,117.6" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="pgdn" KeyModifiers="None" SpecialKey="True">
+                                        <ui:SendHotkey.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="dfd8f5cf-63a6-4d08-bf9e-a357c8f3f2a7">
+                                            <ui:Target.TimeoutMS>
+                                              <InArgument x:TypeArguments="x:Int32" />
+                                            </ui:Target.TimeoutMS>
+                                            <ui:Target.WaitForReady>
+                                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                                            </ui:Target.WaitForReady>
+                                          </ui:Target>
+                                        </ui:SendHotkey.Target>
+                                      </ui:SendHotkey>
+                                      <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'A21pdf Ad Acrobatsd'" sap:VirtualizedContainerService.HintSize="433.6,347.2" sap2010:WorkflowViewState.IdRef="WindowScope_1" InformativeScreenshot="59c991e4fc9ec37eb73268a4f121e6d7" Selector="&lt;wnd app='acrord32.exe' cls='AcrobatSDIWindow' title='*- Adobe Acrobat Reader DC' /&gt;">
+                                        <ui:WindowScope.Body>
+                                          <ActivityAction x:TypeArguments="x:Object">
+                                            <ActivityAction.Argument>
+                                              <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                            </ActivityAction.Argument>
+                                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="375.2,200" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take Screenshot 'page  Page 1'" sap:VirtualizedContainerService.HintSize="333.6,107.2" sap2010:WorkflowViewState.IdRef="TakeScreenshot_1" Screenshot="[screenshoot]">
+                                                <ui:TakeScreenshot.Target>
+                                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="93571483-8ffe-4259-8ad7-82bfee05549f" InformativeScreenshot="1e7663e3bfa87f2d65b96cba3e2ecb17" Selector="&lt;wnd app='acrord32.exe' cls='AcrobatSDIWindow' title='* - Adobe Acrobat Reader DC' /&gt;&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='table' idx='2' /&gt;">
+                                                    <ui:Target.TimeoutMS>
+                                                      <InArgument x:TypeArguments="x:Int32" />
+                                                    </ui:Target.TimeoutMS>
+                                                    <ui:Target.WaitForReady>
+                                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                    </ui:Target.WaitForReady>
+                                                  </ui:Target>
+                                                </ui:TakeScreenshot.Target>
+                                              </ui:TakeScreenshot>
+                                            </Sequence>
+                                          </ActivityAction>
+                                        </ui:WindowScope.Body>
+                                      </ui:WindowScope>
+                                      <ui:SaveImage DisplayName="Save Image" FileName="Anexo\Images\Untitled.png" sap:VirtualizedContainerService.HintSize="433.6,92.8" sap2010:WorkflowViewState.IdRef="SaveImage_1" Image="[screenshoot]" />
+                                      <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="433.6,22.4" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="acroRd32" />
+                                    </Sequence>
+                                    <Assign sap:VirtualizedContainerService.HintSize="475.2,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[image_name]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[path.getfilename(item.tostring).split("."c)(0)+".1.2.png"]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="475.2,306.4" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="278.4,228" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="236.8,135.2" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add">
+                                            <InvokeMethod.TargetObject>
+                                              <InArgument x:TypeArguments="scg:List(x:String)">[out_Attachments]</InArgument>
+                                            </InvokeMethod.TargetObject>
+                                            <InArgument x:TypeArguments="x:String">[image_name]</InArgument>
+                                          </InvokeMethod>
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                  </Sequence>
+                                </If.Then>
+                              </If>
+                              <If Condition="[index = attachmentsList-1]" sap:VirtualizedContainerService.HintSize="660.8,748.8" sap2010:WorkflowViewState.IdRef="If_2">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="476.8,599.2" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[&quot;Anexo/Attachment/&quot;+path.GetFileNameWithoutExtension(item)+io_SimCode.ToString+&quot;.pdf&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="435.2,160" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[item]" />
+                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="435.2,306.4" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                                      <ui:CommentOut.Body>
+                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="278.4,228" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="236.8,135.2" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="Add">
+                                            <InvokeMethod.TargetObject>
+                                              <InArgument x:TypeArguments="scg:List(x:String)">[out_Attachments]</InArgument>
+                                            </InvokeMethod.TargetObject>
+                                            <InArgument x:TypeArguments="x:String">
+                                              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;Anexo/Attachment/&quot;+path.GetFileNameWithoutExtension(item)+io_SimCode.ToString+&quot;.pdf&quot;+io_SimCode" />
+                                            </InArgument>
+                                          </InvokeMethod>
+                                        </Sequence>
+                                      </ui:CommentOut.Body>
+                                    </ui:CommentOut>
+                                  </Sequence>
+                                </If.Then>
+                              </If>
+                              <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="660.8,22.4" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[item]" />
                             </Sequence>
-                          </If.Then>
-                        </If>
-                        <If Condition="[index = attachmentsList.count-1]" sap:VirtualizedContainerService.HintSize="688,237.6" sap2010:WorkflowViewState.IdRef="If_2">
-                          <If.Then>
-                            <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Save Attachments" FolderPath="Anexos" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_2" Message="[mail]" />
-                          </If.Then>
-                        </If>
-                      </Sequence>
-                    </ActivityAction>
-                  </ui:ForEach.Body>
-                </ui:ForEach>
-              </If.Else>
-            </If>
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEach.Body>
-    </ui:ForEach>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1085.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Fatal" Message="[&quot;Email box ainda não está no argumento nem no ficheiro de config.&quot;]" />
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                      </ui:ForEach>
+                    </Sequence>
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1141.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Fatal" Message="[&quot;Email box ainda não está no argumento nem no ficheiro de config.&quot;]" />
+    </Sequence>
   </Sequence>
 </Activity>
