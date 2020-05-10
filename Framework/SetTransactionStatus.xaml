@@ -13,7 +13,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>943.2,1390.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>921.6,1390.4</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SetTransactionStatus_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -64,6 +64,7 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart sap2010:Annotation.AnnotationText="Set and log the transaction's status along with extra log fields. &#xA;There can be three possible statuses: Success, Business Exception and System Exception.&#xA;&#xA;Business Rule Exception characterizes an irregular situation according to the process's rules and prevents the transaction to be processed. The transaction is not retried in this case, since the result will be the same until the problem that causes the exception is solved.&#xA;For example, it can be considered a BusinessRuleException if a process expects to read an email's attachment, but the sender didn't attach any file. In this case, immediate retries of the transaction will not yield a different result.&#xA;&#xA;On the other hand, system exceptions are characterized by exceptions whose types are different than BusinessRuleException. When this kind of exception happens, the transaction item can be retried after closing and reopening the applications involved in the process. The rationale behind this is that the exception was caused by a problem in the applications, which might be solved by restarting them.&#xA;&#xA;If Orchestrator queues are the source of transactions, the Set Transaction Status activity is used to update the status. In addition, the retry mechanism is also implemented by Orchestrator.&#xA;&#xA;If Orchestrator queues are not used, the status can be set, for example, by writing to a specific column in a spreadsheet. In such cases, the retry mechanism is covered by the framework and the number of retries is defined in the configuration file.&#xA;&#xA;At the end, io_TransactionNumber is incremented, which makes the framework get the next transaction to be processed." DisplayName="Set Transaction Status" sap:VirtualizedContainerService.HintSize="721.6,1225.6" sap2010:WorkflowViewState.IdRef="Flowchart_2">
@@ -100,7 +101,7 @@
               <av:PointCollection x:Key="ConnectorLocation">110,616.4 110,646.4 210,646.4 210,715.6</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence sap2010:Annotation.AnnotationText="If the transaction item is processed without any exception, its status is updated as Successful." DisplayName="Success" sap:VirtualizedContainerService.HintSize="200,144.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence sap2010:Annotation.AnnotationText="If the transaction item is processed without any exception, its status is updated as Successful." DisplayName="Success" sap:VirtualizedContainerService.HintSize="524.8,931.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -120,7 +121,7 @@
                 </ui:SetTransactionStatus>
               </If.Then>
             </If>
-            <ui:AppendLine DisplayName="Append Line cria uma nova linha no Log com mensagem de transação bem sucedida" Encoding="utf-8" FileName="[Environment.CurrentDirectory+&quot;\Logs\&quot;+in_TransactionItem.Rows(0).Item(6).ToString+in_Log_Date+&quot;_log.txt&quot;]" sap:VirtualizedContainerService.HintSize="483.2,134.4" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt; Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Bem Sucedida! &lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" />
+            <ui:AppendLine DisplayName="Append Line cria uma nova linha no Log com mensagem de transação bem sucedida" Encoding="utf-8" FileName="[&quot;\Logs\log&quot;+Datetime.Now.toString(&quot;dd-MM-yyyy&quot;)+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="483.2,134.4" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt; Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Bem Sucedida! &lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" />
             <Sequence sap2010:Annotation.AnnotationText="Includes custom log fields to the log message.&#xA;They are removed after logging to prevent duplicated status messages about a single transaction." DisplayName="Log Success with additional logging fields" sap:VirtualizedContainerService.HintSize="483.2,370.4" sap2010:WorkflowViewState.IdRef="Sequence_9">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -217,7 +218,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">330,646.133333333333 330,676.133333333333 210,676.133333333333 210,715.6</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap2010:Annotation.AnnotationText="If a BussinessRuleException is thrown during the process, the transaction item's status is updated as Failed (Exception Type: Business).&#xA;" DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="524.8,947.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence sap2010:Annotation.AnnotationText="If a BussinessRuleException is thrown during the process, the transaction item's status is updated as Failed (Exception Type: Business).&#xA;" DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="200,176.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -237,7 +238,7 @@
                     </ui:SetTransactionStatus>
                   </If.Then>
                 </If>
-                <ui:AppendLine DisplayName="Append Line cria uma nova linha no Log com mensagem de transação não sucessedida e o Erro" Encoding="utf-8" FileName="[Environment.CurrentDirectory+&quot;\Logs\&quot;+in_TransactionItem.Rows(0).Item(6).ToString+in_Log_Date+&quot;_log.txt&quot;]" sap:VirtualizedContainerService.HintSize="483.2,134.4" sap2010:WorkflowViewState.IdRef="AppendLine_2" Text="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Mal Sucedida&quot;&amp;&quot;&lt;br&gt; Mensagem - &quot;+  in_BusinessException.Message+ &quot;&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" />
+                <ui:AppendLine DisplayName="Append Line cria uma nova linha no Log com mensagem de transação não sucessedida e o Erro" Encoding="utf-8" FileName="[&quot;\Logs\log&quot;+Datetime.Now.toString(&quot;dd-MM-yyyy&quot;)+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="483.2,134.4" sap2010:WorkflowViewState.IdRef="AppendLine_2" Text="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Mal Sucedida&quot;&amp;&quot;&lt;br&gt; Mensagem - &quot;+  in_BusinessException.Message+ &quot;&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" />
                 <Sequence sap2010:Annotation.AnnotationText="Includes custom log fields to the log message.&#xA;They are removed after logging to prevent duplicated status messages about a single transaction." DisplayName="Log business exception with additional logging fields" sap:VirtualizedContainerService.HintSize="483.2,370.4" sap2010:WorkflowViewState.IdRef="Sequence_10">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
