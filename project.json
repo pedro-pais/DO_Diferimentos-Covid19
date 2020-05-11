@@ -3,10 +3,11 @@
   "description": "",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.Excel.Activities": "[2.8.5]",
-    "UiPath.PDF.Activities": "[3.2.2]",
-    "UiPath.System.Activities": "[20.4.0]",
-    "UiPath.UIAutomation.Activities": "[19.11.2]"
+    "UiPath.Excel.Activities": "[2.7.2]",
+    "UiPath.Mail.Activities": "[1.7.2]",
+    "UiPath.PDF.Activities": "[3.1.0]",
+    "UiPath.System.Activities": "[19.10.1]",
+    "UiPath.UIAutomation.Activities": "[19.11.1]"
   },
   "webServices": [],
   "schemaVersion": "4.0",
