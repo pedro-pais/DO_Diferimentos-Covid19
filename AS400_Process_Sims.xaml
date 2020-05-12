@@ -1,17 +1,18 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="AS400_Process_Sims" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="AS400_Process_Sims" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="io_SimCode" Type="InOutArgument(x:Int32)" />
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_ParametersDT" Type="InArgument(sd:DataTable)" />
     <x:Property Name="out_SimID" Type="OutArgument(x:String)" />
+    <x:Property Name="in_email_diferendos" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>220,143</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>992.8,1445.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>AS400_Process_Sims_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <sco:Collection x:TypeArguments="x:String">
+    <scg:List x:TypeArguments="x:String" Capacity="24">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -33,10 +34,13 @@
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Windows.Markup</x:String>
-    </sco:Collection>
+      <x:String>UiPath.Terminal</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Globalization</x:String>
+    </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <sco:Collection x:TypeArguments="AssemblyReference">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="42">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -55,13 +59,478 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-    </sco:Collection>
+      <AssemblyReference>UiPath.Terminal</AssemblyReference>
+      <AssemblyReference>UiPath.Terminal.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AS400_Process_Sims" sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AS400_Process_Sims" sap:VirtualizedContainerService.HintSize="831.2,1240.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="Data_pagamento" />
+      <Variable x:TypeArguments="x:String" Name="Interest_rate" />
+      <Variable x:TypeArguments="x:String" Name="Due_payment" />
+      <Variable x:TypeArguments="x:String" Name="screenAS400" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="789.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Entrou no AS400_Process_Sim&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="789.6,483.2" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="1557.6,9625.6" sap2010:WorkflowViewState.IdRef="Sequence_34">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="codigoErro" />
+            <Variable x:TypeArguments="x:String" Name="mensagem" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'B','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Terminal Session" sap:VirtualizedContainerService.HintSize="1516,9532.8" sap2010:WorkflowViewState.IdRef="TerminalSession_5" TimeoutMS="50000">
+            <uit:TerminalSession.Body>
+              <ActivityAction x:TypeArguments="uit:TerminalConnection">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="1482.4,9432.8" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="Ecrã_option" />
+                    <Variable x:TypeArguments="x:String" Name="Basic_note_Data_Screen" />
+                    <Variable x:TypeArguments="x:String" Name="Loan_equiry_Screen" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uit:TerminalGetFieldAtPosition Column="27" DelayMS="300" DisplayName="Get Field at Position Ecrã opção" sap:VirtualizedContainerService.HintSize="1440.8,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_12" Row="1" Text="[Ecrã_option]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalGetText DelayMS="1000" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="1440.8,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_3" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                  <If Condition="[ecrã_option.Contains(&quot;Comprehensive&quot;)]" sap:VirtualizedContainerService.HintSize="1440.8,432.8" sap2010:WorkflowViewState.IdRef="If_13">
+                    <If.Then>
+                      <Sequence DisplayName="Opcçao selection" sap:VirtualizedContainerService.HintSize="375.2,283.2" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uit:TerminalSetFieldAtPosition Column="7" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (509224)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_65" Row="20" Text="[in_ParametersDT.Rows(1).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="333.6,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_19" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não se encontra no ecrã correto quando tentou aceder às opções&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_6" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Error" Message="[&quot;o AS400 não se encontra no ecrã correto quando tentou aceder às opções&quot;]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <uit:TerminalGetFieldAtPosition Column="15" DelayMS="300" DisplayName="Get Field at Position ecrã loan equiry" sap:VirtualizedContainerService.HintSize="1440.8,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_13" Row="3" Text="[Loan_equiry_Screen]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalGetText DelayMS="1000" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="1440.8,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_4" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                  <If Condition="[Loan_equiry_Screen.Contains(&quot;Diferimento de prestações - SIMULAÇÃO&quot;) or  Loan_equiry_Screen.Contains(&quot;CUT do valor da prestação do contrato-Simulação&quot;)]" sap:VirtualizedContainerService.HintSize="1440.8,1200.8" sap2010:WorkflowViewState.IdRef="If_14">
+                    <If.Then>
+                      <Sequence DisplayName="Diferendo part 1" sap:VirtualizedContainerService.HintSize="375.2,1051.2" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uit:TerminalSetFieldAtPosition Column="23" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (80003446164)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_66" Row="5" Text="[in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSetFieldAtPosition Column="52" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (120520)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_67" Row="5" Text="[Date.Now.ToString(&quot;dMMyy&quot;)]" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSetFieldAtPosition Column="74" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (S)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_68" Row="5" Text="S" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Tipo de Diferimento / CUT)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_69" Row="6" Text="[in_ParametersDT.Rows(2).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Considerar paga a próxima prestação)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_70" Row="7" Text="[in_ParametersDT.Rows(3).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Limpar campo valor de comissão)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_71" Row="8" Text="[in_ParametersDT.Rows(4).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (nº de Diferimentos)&quot;" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_72" Row="9" Text="[in_TransactionItem.SpecificContent(&quot;Qtd Diferimento&quot;).ToString]" TimeoutMS="5000" WaitType="READY" />
+                        <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="333.6,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_20" Key="F22" TimeoutMS="5000" WaitType="READY" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à simulação de diferendos &quot; + screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_14" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;o AS400 não consegui aceder à simulação de diferendos &quot;]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <uit:TerminalGetFieldAtPosition Column="34" DelayMS="300" DisplayName="Get Field at Position basic note data" sap:VirtualizedContainerService.HintSize="1440.8,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_14" Row="1" Text="[Basic_note_Data_Screen]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalGetText DelayMS="1000" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="1440.8,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_5" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalGetField DelayMS="300" DisplayName="Get Field" FollowedBy="-" sap:VirtualizedContainerService.HintSize="1440.8,88" sap2010:WorkflowViewState.IdRef="TerminalGetField_1" Index="1" LabeledBy="F22=Consultar Empr" Text="[codigoErro]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalGetField DelayMS="300" DisplayName="Get Field" sap:VirtualizedContainerService.HintSize="1440.8,88" sap2010:WorkflowViewState.IdRef="TerminalGetField_2" Index="1" LabeledBy="-" Text="[mensagem]" TimeoutMS="5000" WaitType="READY">
+                    <uit:TerminalGetField.FollowedBy>
+                      <InArgument x:TypeArguments="x:String">
+                        <Literal x:TypeArguments="x:String" Value="" />
+                      </InArgument>
+                    </uit:TerminalGetField.FollowedBy>
+                  </uit:TerminalGetField>
+                  <Assign sap:VirtualizedContainerService.HintSize="1440.8,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[mensagemErro]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[codigoErro + " - " + mensagem]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <If Condition="[Basic_note_Data_Screen.Contains(&quot;Loan Enquiry&quot;)]" sap:VirtualizedContainerService.HintSize="1440.8,1684.8" sap2010:WorkflowViewState.IdRef="If_17">
+                    <If.Then>
+                      <Sequence DisplayName="Data and interest rate" sap:VirtualizedContainerService.HintSize="1021.6,1535.2" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uit:TerminalGetFieldAtPosition Column="32" DelayMS="300" DisplayName="Get Field at Position date" sap:VirtualizedContainerService.HintSize="980,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_15" Row="21" Text="[Data_pagamento]" TimeoutMS="5000" WaitType="READY" />
+                        <Assign DisplayName="Assign data do proximo pagameto" sap:VirtualizedContainerService.HintSize="980,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Data_pagamento]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[Data_pagamento.Replace("-","/")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <If Condition="[io_SimCode = 1]" DisplayName="If buscar interest rate e o está due ou ñ" sap:VirtualizedContainerService.HintSize="980,1140" sap2010:WorkflowViewState.IdRef="If_16">
+                          <If.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="836,990.4" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="x:String" Name="unpayed_payments_screen" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <uit:TerminalGetFieldAtPosition Column="32" DelayMS="300" DisplayName="Get Field at Position interest rate" sap:VirtualizedContainerService.HintSize="794.4,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_16" Row="14" Text="[Interest_rate]" TimeoutMS="5000" WaitType="READY" />
+                              <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Pagina)&quot;" sap:VirtualizedContainerService.HintSize="794.4,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_73" Row="1" Text="04" TimeoutMS="5000" WaitType="READY" />
+                              <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="794.4,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_21" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+                              <uit:TerminalGetFieldAtPosition Column="29" DelayMS="300" DisplayName="Get Field at Position billed unpayed payments" sap:VirtualizedContainerService.HintSize="794.4,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_17" Row="2" Text="[unpayed_payments_screen]" TimeoutMS="5000" WaitType="READY" />
+                              <uit:TerminalGetText DelayMS="1000" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="794.4,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_6" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                              <If Condition="[unpayed_payments_screen.Contains(&quot;Billed/Unpaid Payments&quot;)]" sap:VirtualizedContainerService.HintSize="794.4,404.8" sap2010:WorkflowViewState.IdRef="If_15">
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="375.2,255.2" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <uit:TerminalGetFieldAtPosition Column="66" DelayMS="300" DisplayName="Get Field at Position" sap:VirtualizedContainerService.HintSize="333.6,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_18" Row="1" Text="[Due_payment]" TimeoutMS="5000" WaitType="READY" />
+                                    <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="333.6,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_22" Key="F3" TimeoutMS="5000" WaitType="READY" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à ionformação de pagamentos em Atraso&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_15" />
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;o AS400 não consegui aceder à ionformação de pagamentos em Atraso&quot;]" />
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </If.Then>
+                        </If>
+                        <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="980,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_23" Key="F3" TimeoutMS="5000" WaitType="READY" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Throw Exception="[New Exception (&quot;o AS400 não consegui aceder à página Loan Enquiry por erro do sistema ou porque o contrato não é válido devido ao Erro &quot; + codigoErro + Environment.NewLine+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_16" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;o AS400 não consegui aceder à página Loan Enquiry por erro do sistema ou porque o contrato não é válido devido ao Erro &quot; + codigoErro]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <uit:TerminalGetFieldAtPosition Column="15" DelayMS="1000" DisplayName="Get Field at Position ecrã loan equiry" sap:VirtualizedContainerService.HintSize="1440.8,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_19" Row="3" Text="[Loan_equiry_Screen]" TimeoutMS="5000" WaitType="READY" />
+                  <uit:TerminalGetText DelayMS="1000" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="1440.8,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_7" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                  <If Condition="[Loan_equiry_Screen.Contains(&quot;Diferimento de prestações - SIMULAÇÃO&quot;) or  Loan_equiry_Screen.Contains(&quot;CUT do valor da prestação do contrato-Simulação&quot;)]" sap:VirtualizedContainerService.HintSize="1440.8,4896" sap2010:WorkflowViewState.IdRef="If_19">
+                    <If.Then>
+                      <Sequence DisplayName="Diferendo 2" sap:VirtualizedContainerService.HintSize="908,4746.4" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="866.4,2410.4" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="s:DateTime" Name="Data_Proximo_pagamento" />
+                            <Variable x:TypeArguments="x:String" Name="Month_next_payment" />
+                            <Variable x:TypeArguments="x:String" Name="Day_next_payment" />
+                            <Variable x:TypeArguments="x:String" Name="year_next_payment" />
+                            <Variable x:TypeArguments="x:String" Name="Month_diferendo" />
+                            <Variable x:TypeArguments="s:String[]" Name="Date_split" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="337.6,286.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                            <ui:MultipleAssign.AssignOperations>
+                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="s:DateTime">[Data_Proximo_pagamento]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="s:DateTime">[Datetime.ParseExact(Data_pagamento,“dd/MM/yy”,System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="s:String[]">[Date_split]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="s:String[]">[Data_Proximo_pagamento.toString("dd/MM/yy").Split("/"c)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[Day_next_payment]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[Date_split(0)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[Month_next_payment]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[Date_split(1)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[Month_diferendo]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(Month_next_payment)+3).ToString]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[Month_diferendo]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[Datetime.ParseExact(Month_diferendo ,“MMMM”,System.Globalization.CultureInfo.InvariantCulture).ToString(“MM”)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[year_next_payment]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[Date_split(2)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                              </scg:List>
+                            </ui:MultipleAssign.AssignOperations>
+                          </ui:MultipleAssign>
+                          <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (120720)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_74" Row="10" Text="[day_next_payment+ Month_next_payment.ToString+year_next_payment]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (120920)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_75" Row="11" Text="[day_next_payment+Month_diferendo.ToString+year_next_payment]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Comissão de diferimento)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_76" Row="12" Text="[in_ParametersDT.Rows(5).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="74" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Cobrar com a próxima prestação)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_77" Row="12" Text="[in_ParametersDT.Rows(6).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Juros a incluir na prestação seguinte)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_78" Row="13" Text="[in_ParametersDT.Rows(7).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="74" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (N)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_79" Row="13" Text="[in_ParametersDT.Rows(8).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Enviar informação)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_80" Row="16" Text="[in_ParametersDT.Rows(9).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="48" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Departamento)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_81" Row="16" Text="[in_ParametersDT.Rows(10).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="63" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Tipo )&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_82" Row="16" Text="[in_ParametersDT.Rows(11).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (email)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_83" Row="19" Text="[in_email_diferendos]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Sem decorrer prazo mínimo após financiamento/última operação)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_84" Row="20" Text="S" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Exceder nº máximo de prestações vencidas)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_85" Row="21" Text="S" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Diferimento/Cut em contrato sem ADC activa)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_86" Row="22" Text="S" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="337.6,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_24" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalGetFieldAtPosition Column="69" DelayMS="300" DisplayName="Get Field at Position" sap:VirtualizedContainerService.HintSize="337.6,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_21" Row="2" Text="[out_SimID]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="337.6,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_2" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="337.6,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_25" Key="F8" TimeoutMS="5000" WaitType="READY" />
+                        </Sequence>
+                        <If Condition="[screenAS400.Contains(&quot;Diferimento prest efetuado c/sucesso&quot;) OR screenAS400.Contains(&quot;CUT prestações efetuado c/sucesso&quot;)]" sap:VirtualizedContainerService.HintSize="866.4,2203.2" sap2010:WorkflowViewState.IdRef="If_22">
+                          <If.Else>
+                            <Sequence sap:VirtualizedContainerService.HintSize="722.4,2053.6" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" sap2010:Annotation.AnnotationText="Retira a mensagem de erro" CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'A','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Terminal Session" sap:VirtualizedContainerService.HintSize="680.8,1960.8" sap2010:WorkflowViewState.IdRef="TerminalSession_6" TimeoutMS="50000">
+                                <uit:TerminalSession.Body>
+                                  <ActivityAction x:TypeArguments="uit:TerminalConnection">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
+                                    </ActivityAction.Argument>
+                                    <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="647.2,1829.6" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                      <Sequence.Variables>
+                                        <Variable x:TypeArguments="x:String" Name="mensagemErro" />
+                                      </Sequence.Variables>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <uit:TerminalGetField DelayMS="300" DisplayName="Get Field" FollowedBy="-" sap:VirtualizedContainerService.HintSize="605.6,88" sap2010:WorkflowViewState.IdRef="TerminalGetField_3" Index="1" LabeledBy="F22=Consultar Empr" Text="[codigoErro]" TimeoutMS="5000" WaitType="READY" />
+                                      <uit:TerminalGetField DelayMS="300" DisplayName="Get Field" sap:VirtualizedContainerService.HintSize="605.6,88" sap2010:WorkflowViewState.IdRef="TerminalGetField_4" Index="1" LabeledBy="-" Text="[mensagem]" TimeoutMS="5000" WaitType="READY">
+                                        <uit:TerminalGetField.FollowedBy>
+                                          <InArgument x:TypeArguments="x:String">
+                                            <Literal x:TypeArguments="x:String" Value="" />
+                                          </InArgument>
+                                        </uit:TerminalGetField.FollowedBy>
+                                      </uit:TerminalGetField>
+                                      <Assign sap:VirtualizedContainerService.HintSize="605.6,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:String">[mensagemErro]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:String">[codigoErro + " - " + mensagem]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <DoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="605.6,943.2" sap2010:WorkflowViewState.IdRef="DoWhile_1">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <DoWhile.Condition>[screenAS400.Contains("Comprehensive Banking System")]</DoWhile.Condition>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="560.8,780.8" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="519.2,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_26" Key="F3" TimeoutMS="5000" WaitType="READY" />
+                                          <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="519.2,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_8" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                                          <If Condition="[screenAS400.Contains(&quot;Exit CBS Session&quot;)]" sap:VirtualizedContainerService.HintSize="519.2,523.2" sap2010:WorkflowViewState.IdRef="If_20">
+                                            <If.Then>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="375.2,373.6" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <uit:TerminalSetField DelayMS="300" DisplayName="&quot;Definir Campo (2)&quot;" FollowedBy=":" sap:VirtualizedContainerService.HintSize="333.6,116" sap2010:WorkflowViewState.IdRef="TerminalSetField_1" Index="6" LabeledBy=":" Text="2" TimeoutMS="5000" WaitType="READY" />
+                                                <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="333.6,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_27" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
+                                                <uit:TerminalGetText DelayMS="300" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_9" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
+                                              </Sequence>
+                                            </If.Then>
+                                          </If>
+                                        </Sequence>
+                                      </DoWhile>
+                                      <If Condition="[string.IsNullOrEmpty(mensagemErro)]" sap:VirtualizedContainerService.HintSize="605.6,397.6" sap2010:WorkflowViewState.IdRef="If_21">
+                                        <If.Else>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <Throw DisplayName="Throw Business Rule Exception" Exception="[new BusinessRuleException(mensagemErro)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_13" />
+                                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Error" Message="[&quot;o AS400 não consegui concluir a simulação de diferendos&quot; + mensagemErro]" />
+                                          </Sequence>
+                                        </If.Else>
+                                      </If>
+                                    </Sequence>
+                                  </ActivityAction>
+                                </uit:TerminalSession.Body>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </uit:TerminalSession>
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à simulação de diferendos&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_12" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Error" Message="[&quot;o AS400 não consegui aceder à simulação de diferendos parte 2&quot;]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ActivityAction>
+            </uit:TerminalSession.Body>
+          </uit:TerminalSession>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,318.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_45">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Throw Exception="[new SystemException ( &quot;Ocurreu um erro ao aceder ao Terminal AS400_Pocess_Sims&quot; + exception.Message)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_17" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Erro ao aceder ao Terminal no AS400_Process_Sims&quot; + exception.Message]" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <If Condition="[io_SimCode.Equals(1) and (Due_payment.Contains(&quot;Due&quot;) or Interest_Rate is &quot;0&quot;)]" sap:VirtualizedContainerService.HintSize="789.6,359.2" sap2010:WorkflowViewState.IdRef="If_6">
+      <If.Then>
+        <If Condition="[Interest_Rate is &quot;0&quot;]" sap:VirtualizedContainerService.HintSize="483.2,209.6" sap2010:WorkflowViewState.IdRef="If_5">
+          <If.Else>
+            <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[io_SimCode]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">3</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Else>
+        </If>
+      </If.Then>
+      <If.Else>
+        <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[io_SimCode]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[io_SimCode +1]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </If.Else>
+    </If>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="789.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Saiu do AS400_Process_Sim&quot;]" />
   </Sequence>
 </Activity>
