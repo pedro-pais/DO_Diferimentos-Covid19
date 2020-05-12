@@ -230,7 +230,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">330,646.133333333333 330,676.133333333333 210,676.133333333333 210,715.6</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap2010:Annotation.AnnotationText="If a BussinessRuleException is thrown during the process, the transaction item's status is updated as Failed (Exception Type: Business).&#xA;" DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="524.8,1304.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence sap2010:Annotation.AnnotationText="If a BussinessRuleException is thrown during the process, the transaction item's status is updated as Failed (Exception Type: Business).&#xA;" DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="200,176.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -262,7 +262,7 @@
                     </Sequence>
                   </ui:CommentOut.Body>
                 </ui:CommentOut>
-                <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Mal Sucedida&quot;&amp;&quot;&lt;br&gt; Mensagem - &quot;+  in_BusinessException.Message+ &quot;&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="483.2,146.4" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="True" IsDraft="False" Subject="Business Error no Processo DO_Diferimentos_Covid" To="[in_email_error]">
+                <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Mal Sucedida&quot;&amp;&quot;&lt;br&gt; Mensagem - &quot;+  in_BusinessException.Message+ &quot;&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="483.2,146.4" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="True" IsDraft="False" Subject="Business Error no Processo DO_Diferimentos_Covid19" To="[in_email_error]">
                   <ui:SendOutlookMail.Files>
                     <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
                   </ui:SendOutlookMail.Files>
@@ -275,7 +275,7 @@
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:AddLogFields DisplayName="Add transaction log fields (Business Exception)" sap:VirtualizedContainerService.HintSize="334.4,22.4" sap2010:WorkflowViewState.IdRef="AddLogFields_5">
+                  <ui:AddLogFields DisplayName="Add transaction log fields (Business Exception)" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="AddLogFields_5">
                     <ui:AddLogFields.Fields>
                       <InArgument x:TypeArguments="x:String" x:Key="logF_TransactionStatus">BusinessException</InArgument>
                       <InArgument x:TypeArguments="x:String" x:Key="logF_TransactionNumber">[io_TransactionNumber.ToString]</InArgument>
@@ -284,8 +284,8 @@
                       <InArgument x:TypeArguments="x:String" x:Key="logF_TransactionField2">[in_TransactionField2]</InArgument>
                     </ui:AddLogFields.Fields>
                   </ui:AddLogFields>
-                  <ui:LogMessage DisplayName="Log Message (Business Exception)" sap:VirtualizedContainerService.HintSize="334.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Error" Message="[in_Config(&quot;LogMessage_BusinessRuleException&quot;).ToString + in_BusinessException.Message]" />
-                  <ui:RemoveLogFields DisplayName="Remove transaction log fields (Business Exception)" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="RemoveLogFields_9">
+                  <ui:LogMessage DisplayName="Log Message (Business Exception)" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Error" Message="[in_Config(&quot;LogMessage_BusinessRuleException&quot;).ToString + in_BusinessException.Message]" />
+                  <ui:RemoveLogFields DisplayName="Remove transaction log fields (Business Exception)" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="RemoveLogFields_9">
                     <ui:RemoveLogFields.Fields>
                       <scg:List x:TypeArguments="InArgument(x:String)" Capacity="8">
                         <InArgument x:TypeArguments="x:String">logF_TransactionStatus</InArgument>
@@ -311,7 +311,7 @@
                   <av:Size x:Key="ShapeSize">200,160.8</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap2010:Annotation.AnnotationText="If a system exception occurs during the process, the transaction item's status is updated as Failed (Exception Type: Application)." DisplayName="System Exception" sap:VirtualizedContainerService.HintSize="200,160.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Sequence sap2010:Annotation.AnnotationText="If a system exception occurs during the process, the transaction item's status is updated as Failed (Exception Type: Application)." DisplayName="System Exception" sap:VirtualizedContainerService.HintSize="525.6,1857.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:Boolean" Name="QueueRetry" />
                 </Sequence.Variables>
@@ -376,7 +376,7 @@
                     <InArgument x:TypeArguments="x:Boolean" x:Key="in_QueueRetry">[QueueRetry]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
-                <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Mal Sucedida&quot;&amp;&quot;&lt;br&gt; Mensagem - &quot;+  in_SystemException.Message+ &quot;&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="484,146.4" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" IsBodyHtml="True" IsDraft="False" Subject="System Error no Processo DO_Diferimentos_Covid" To="[in_email_error]">
+                <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;Transação relativa ao contrato &lt;b&gt;&quot;+  in_TransactionItem.SpecificContent(&quot;Contrato Cliente&quot;).ToString+ &quot;&lt;/b&gt; - Mal Sucedida&quot;&amp;&quot;&lt;br&gt; Mensagem - &quot;+  in_SystemException.Message+ &quot;&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="484,146.4" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" IsBodyHtml="True" IsDraft="False" Subject="System Error no Processo DO_Diferimentos_Covid19" To="[in_email_error]">
                   <ui:SendOutlookMail.Files>
                     <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
                   </ui:SendOutlookMail.Files>
