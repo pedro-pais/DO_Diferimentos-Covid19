@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="AS400_BackTo_WorkWithLoanSubsystem" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="921.6,1316" sap2010:WorkflowViewState.IdRef="AS400_BackTo_WorkWithLoanSubsystem_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="AS400_BackTo_WorkWithLoanSubsystem" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="992.8,1621.6" sap2010:WorkflowViewState.IdRef="AS400_BackTo_WorkWithLoanSubsystem_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uit="http://schemas.uipath.com/workflow/activities/terminal" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -45,14 +45,19 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Terminal</AssemblyReference>
       <AssemblyReference>UiPath.Terminal.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AS400_BackTo_WorkWithLoanSubsystem" sap:VirtualizedContainerService.HintSize="636,1151.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AS400_BackTo_WorkWithLoanSubsystem" sap:VirtualizedContainerService.HintSize="636,1416.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="594.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Entrou no AS400_BackTo_WorkWithLoanSubsystem&quot;]" />
     <uit:TerminalSession ContinueOnError="{x:Null}" ExistingConnection="{x:Null}" OutputConnection="{x:Null}" CloseConnection="True" ConnectionString="{}{'AttachExisting':false,'ConnectionType':2,'EhllBasicMode':false,'EhllDll':'C:\\Program Files (x86)\\IBM\\Client Access\\Emulator\\pcshll32.dll','EhllEnhanced':true,'EhllFunction':'hllapi','EhllSession':'B','Host':null,'Mode':1,'Port':23,'Profile':null,'ProviderType':4,'ShowTerminal':true,'TerminalType':0}" DelayMS="1000" DisplayName="Terminal Session" sap:VirtualizedContainerService.HintSize="594.4,1058.4" sap2010:WorkflowViewState.IdRef="TerminalSession_1" TimeoutMS="50000">
       <uit:TerminalSession.Body>
         <ActivityAction x:TypeArguments="uit:TerminalConnection">
@@ -89,5 +94,6 @@
         </ActivityAction>
       </uit:TerminalSession.Body>
     </uit:TerminalSession>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="594.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Saiu do AS400_BackTo_WorkWithLoanSubsystem&quot;]" />
   </Sequence>
 </Activity>
