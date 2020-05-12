@@ -4,11 +4,12 @@
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="in_ParametersDT" Type="InArgument(sd:DataTable)" />
     <x:Property Name="out_SimID" Type="OutArgument(x:String)" />
+    <x:Property Name="in_email_diferendos" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1300,10094.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1300,10134.4</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>AS400_Process_Sims_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="24">
@@ -39,7 +40,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="21">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="42">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -61,6 +62,7 @@
       <AssemblyReference>UiPath.Terminal</AssemblyReference>
       <AssemblyReference>UiPath.Terminal.Activities</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="AS400_Process_Sims" sap:VirtualizedContainerService.HintSize="1310.4,9929.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -171,7 +173,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <uit:TerminalGetFieldAtPosition Column="32" DelayMS="300" DisplayName="Get Field at Position date" sap:VirtualizedContainerService.HintSize="804.8,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_15" Row="21" Text="[Data_pagamento]" TimeoutMS="5000" WaitType="READY" />
-                    <Assign sap:VirtualizedContainerService.HintSize="804.8,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                    <Assign DisplayName="Assign data do proximo pagameto" sap:VirtualizedContainerService.HintSize="804.8,60" sap2010:WorkflowViewState.IdRef="Assign_10">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[Data_pagamento]</OutArgument>
                       </Assign.To>
@@ -179,7 +181,7 @@
                         <InArgument x:TypeArguments="x:String">[Data_pagamento.Replace("-","/")]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <If Condition="[io_SimCode = 1]" sap:VirtualizedContainerService.HintSize="804.8,1140" sap2010:WorkflowViewState.IdRef="If_16">
+                    <If Condition="[io_SimCode = 1]" DisplayName="If buscar interest rate e o está due ou ñ" sap:VirtualizedContainerService.HintSize="804.8,1140" sap2010:WorkflowViewState.IdRef="If_16">
                       <If.Then>
                         <Sequence sap:VirtualizedContainerService.HintSize="660.8,990.4" sap2010:WorkflowViewState.IdRef="Sequence_29">
                           <Sequence.Variables>
@@ -190,7 +192,7 @@
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <uit:TerminalGetFieldAtPosition Column="32" DelayMS="300" DisplayName="Get Field at Position interest reat" sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_16" Row="14" Text="[Interest_rate]" TimeoutMS="5000" WaitType="READY" />
+                          <uit:TerminalGetFieldAtPosition Column="32" DelayMS="300" DisplayName="Get Field at Position interest rate" sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_16" Row="14" Text="[Interest_rate]" TimeoutMS="5000" WaitType="READY" />
                           <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Pagina)&quot;" sap:VirtualizedContainerService.HintSize="619.2,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_73" Row="1" Text="04" TimeoutMS="5000" WaitType="READY" />
                           <uit:TerminalSendControlKey DelayMS="1000" DisplayName="Send Control Key" sap:VirtualizedContainerService.HintSize="619.2,62.4" sap2010:WorkflowViewState.IdRef="TerminalSendControlKey_21" Key="Transmit" TimeoutMS="5000" WaitType="READY" />
                           <uit:TerminalGetFieldAtPosition Column="29" DelayMS="300" DisplayName="Get Field at Position billed unpayed payments" sap:VirtualizedContainerService.HintSize="619.2,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_17" Row="2" Text="[unpayed_payments_screen]" TimeoutMS="5000" WaitType="READY" />
@@ -223,7 +225,7 @@
               </If>
               <uit:TerminalGetFieldAtPosition Column="15" DelayMS="1000" DisplayName="Get Field at Position ecrã loan equiry" sap:VirtualizedContainerService.HintSize="1152,60" sap2010:WorkflowViewState.IdRef="TerminalGetFieldAtPosition_19" Row="3" Text="[Loan_equiry_Screen]" TimeoutMS="5000" WaitType="READY" />
               <uit:TerminalGetText DelayMS="1000" DisplayName="Get Text" sap:VirtualizedContainerService.HintSize="1152,22.4" sap2010:WorkflowViewState.IdRef="TerminalGetText_7" Text="[screenAS400]" TimeoutMS="5000" WaitType="READY" />
-              <If Condition="[Loan_equiry_Screen.Contains(&quot;Diferimento de prestações - SIMULAÇÃO&quot;)]" sap:VirtualizedContainerService.HintSize="1152,4708" sap2010:WorkflowViewState.IdRef="If_19">
+              <If Condition="[Loan_equiry_Screen.Contains(&quot;Diferimento de prestações - SIMULAÇÃO&quot;) or  Loan_equiry_Screen.Contains(&quot;CUT do valor da prestação do contrato-Simulação&quot;)]" sap:VirtualizedContainerService.HintSize="1152,4708" sap2010:WorkflowViewState.IdRef="If_19">
                 <If.Then>
                   <Sequence DisplayName="Diferendo 2" sap:VirtualizedContainerService.HintSize="908,4558.4" sap2010:WorkflowViewState.IdRef="Sequence_32">
                     <sap:WorkflowViewStateService.ViewState>
@@ -316,7 +318,7 @@
                       <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Enviar informação)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_80" Row="16" Text="[in_ParametersDT.Rows(9).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
                       <uit:TerminalSetFieldAtPosition Column="48" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Departamento)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_81" Row="16" Text="[in_ParametersDT.Rows(10).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
                       <uit:TerminalSetFieldAtPosition Column="63" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Tipo )&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_82" Row="16" Text="[in_ParametersDT.Rows(11).Item(io_simCode).ToString]" TimeoutMS="5000" WaitType="READY" />
-                      <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (email)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_83" Row="19" Text="andre.r.silva@noesis.pt" TimeoutMS="5000" WaitType="READY" />
+                      <uit:TerminalSetFieldAtPosition Column="33" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (email)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_83" Row="19" Text="[in_email_diferendos]" TimeoutMS="5000" WaitType="READY" />
                       <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Sem decorrer prazo mínimo após financiamento/última operação)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_84" Row="20" Text="S" TimeoutMS="5000" WaitType="READY" />
                       <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Exceder nº máximo de prestações vencidas)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_85" Row="21" Text="S" TimeoutMS="5000" WaitType="READY" />
                       <uit:TerminalSetFieldAtPosition Column="66" DelayMS="300" DisplayName="&quot;Definir Campo na Posição (Diferimento/Cut em contrato sem ADC activa)&quot;" sap:VirtualizedContainerService.HintSize="337.6,88" sap2010:WorkflowViewState.IdRef="TerminalSetFieldAtPosition_86" Row="22" Text="S" TimeoutMS="5000" WaitType="READY" />
