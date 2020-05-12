@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>992.8,1445.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1625.6,10779.2</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>AS400_Process_Sims_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="24">
@@ -62,10 +62,9 @@
       <AssemblyReference>UiPath.Terminal</AssemblyReference>
       <AssemblyReference>UiPath.Terminal.Activities</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AS400_Process_Sims" sap:VirtualizedContainerService.HintSize="831.2,1240.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AS400_Process_Sims" sap:VirtualizedContainerService.HintSize="1636,10614.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Data_pagamento" />
       <Variable x:TypeArguments="x:String" Name="Interest_rate" />
@@ -77,8 +76,11 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="789.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Entrou no AS400_Process_Sim&quot;]" />
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="789.6,483.2" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1594.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Entrou no AS400_Process_Sim&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1594.4,9856.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Variables>
+        <Variable x:TypeArguments="x:String" Name="mensagemErro" />
+      </TryCatch.Variables>
       <TryCatch.Try>
         <Sequence sap:VirtualizedContainerService.HintSize="1557.6,9625.6" sap2010:WorkflowViewState.IdRef="Sequence_34">
           <Sequence.Variables>
@@ -128,8 +130,8 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não se encontra no ecrã correto quando tentou aceder às opções&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_6" />
                         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Error" Message="[&quot;o AS400 não se encontra no ecrã correto quando tentou aceder às opções&quot;]" />
+                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não se encontra no ecrã correto quando tentou aceder às opções&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_6" />
                       </Sequence>
                     </If.Else>
                   </If>
@@ -160,8 +162,8 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à simulação de diferendos &quot; + screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_14" />
                         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;o AS400 não consegui aceder à simulação de diferendos &quot;]" />
+                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à simulação de diferendos &quot; + screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_14" />
                       </Sequence>
                     </If.Else>
                   </If>
@@ -235,8 +237,8 @@
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à ionformação de pagamentos em Atraso&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_15" />
                                     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;o AS400 não consegui aceder à ionformação de pagamentos em Atraso&quot;]" />
+                                    <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à ionformação de pagamentos em Atraso&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_15" />
                                   </Sequence>
                                 </If.Else>
                               </If>
@@ -253,8 +255,8 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Throw Exception="[New Exception (&quot;o AS400 não consegui aceder à página Loan Enquiry por erro do sistema ou porque o contrato não é válido devido ao Erro &quot; + codigoErro + Environment.NewLine+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_16" />
                         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;o AS400 não consegui aceder à página Loan Enquiry por erro do sistema ou porque o contrato não é válido devido ao Erro &quot; + codigoErro]" />
+                        <Throw Exception="[New Exception (&quot;o AS400 não consegui aceder à página Loan Enquiry por erro do sistema ou porque o contrato não é válido devido ao Erro &quot; + codigoErro + Environment.NewLine+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_16" />
                       </Sequence>
                     </If.Else>
                   </If>
@@ -377,9 +379,6 @@
                                       <DelegateInArgument x:TypeArguments="uit:TerminalConnection" Name="terminalSession" />
                                     </ActivityAction.Argument>
                                     <Sequence DisplayName="Fazer" sap:VirtualizedContainerService.HintSize="647.2,1829.6" sap2010:WorkflowViewState.IdRef="Sequence_37">
-                                      <Sequence.Variables>
-                                        <Variable x:TypeArguments="x:String" Name="mensagemErro" />
-                                      </Sequence.Variables>
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -441,8 +440,8 @@
                                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
-                                            <Throw DisplayName="Throw Business Rule Exception" Exception="[new BusinessRuleException(mensagemErro)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_13" />
                                             <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Error" Message="[&quot;o AS400 não consegui concluir a simulação de diferendos&quot; + mensagemErro]" />
+                                            <Throw DisplayName="Throw Business Rule Exception" Exception="[new BusinessRuleException(mensagemErro)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_13" />
                                           </Sequence>
                                         </If.Else>
                                       </If>
@@ -469,8 +468,8 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à simulação de diferendos&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_12" />
                         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Error" Message="[&quot;o AS400 não consegui aceder à simulação de diferendos parte 2&quot;]" />
+                        <Throw Exception="[new BusinessRuleException (&quot;o AS400 não consegui aceder à simulação de diferendos&quot;+screenAS400)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_12" />
                       </Sequence>
                     </If.Else>
                   </If>
@@ -481,10 +480,10 @@
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,318.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1560.8,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -505,7 +504,7 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <If Condition="[io_SimCode.Equals(1) and (Due_payment.Contains(&quot;Due&quot;) or Interest_Rate is &quot;0&quot;)]" sap:VirtualizedContainerService.HintSize="789.6,359.2" sap2010:WorkflowViewState.IdRef="If_6">
+    <If Condition="[io_SimCode.Equals(1) and (Due_payment.Contains(&quot;Due&quot;) or Interest_Rate is &quot;0&quot;)]" sap:VirtualizedContainerService.HintSize="1594.4,359.2" sap2010:WorkflowViewState.IdRef="If_6">
       <If.Then>
         <If Condition="[Interest_Rate is &quot;0&quot;]" sap:VirtualizedContainerService.HintSize="483.2,209.6" sap2010:WorkflowViewState.IdRef="If_5">
           <If.Else>
@@ -531,6 +530,6 @@
         </Assign>
       </If.Else>
     </If>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="789.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Saiu do AS400_Process_Sim&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1594.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Saiu do AS400_Process_Sim&quot;]" />
   </Sequence>
 </Activity>
