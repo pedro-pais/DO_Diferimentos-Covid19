@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>921.6,1003.2</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>992.8,1003.2</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main2_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="26">
@@ -501,72 +501,83 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <Transition.To>
-                            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="End process and close all applications used." DisplayName="End Process" sap:VirtualizedContainerService.HintSize="656,1680.8" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
+                            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="End process and close all applications used." DisplayName="End Process" sap:VirtualizedContainerService.HintSize="732.8,1852" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
                               <State.Entry>
-                                <Sequence sap:VirtualizedContainerService.HintSize="611.2,1536" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                <Sequence sap:VirtualizedContainerService.HintSize="688,1707.2" sap2010:WorkflowViewState.IdRef="Sequence_29">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <If sap:VirtualizedContainerService.HintSize="569.6,1084" sap2010:WorkflowViewState.IdRef="If_12">
-                                    <If.Then>
-                                      <Sequence sap:VirtualizedContainerService.HintSize="425.6,934.4" sap2010:WorkflowViewState.IdRef="Sequence_31">
-                                        <Sequence.Variables>
-                                          <Variable x:TypeArguments="s:DateTime" Name="End_Time" />
-                                          <Variable x:TypeArguments="x:String" Name="email_subject" />
-                                          <Variable x:TypeArguments="x:TimeSpan" Name="Execution_time_subst" />
-                                          <Variable x:TypeArguments="x:String" Name="Execution_time" />
-                                          <Variable x:TypeArguments="x:String" Name="email_body" />
-                                        </Sequence.Variables>
+                                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="646.4,1255.2" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+                                    <ui:CommentOut.Body>
+                                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="611.2,1176.8" sap2010:WorkflowViewState.IdRef="Sequence_32">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_28">
-                                          <Assign.To>
-                                            <OutArgument x:TypeArguments="s:DateTime">[End_Time]</OutArgument>
-                                          </Assign.To>
-                                          <Assign.Value>
-                                            <InArgument x:TypeArguments="s:DateTime">[DateTime.now]</InArgument>
-                                          </Assign.Value>
-                                        </Assign>
-                                        <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_29">
-                                          <Assign.To>
-                                            <OutArgument x:TypeArguments="x:String">[email_subject]</OutArgument>
-                                          </Assign.To>
-                                          <Assign.Value>
-                                            <InArgument x:TypeArguments="x:String">Resultados da Execução</InArgument>
-                                          </Assign.Value>
-                                        </Assign>
-                                        <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_32">
-                                          <Assign.To>
-                                            <OutArgument x:TypeArguments="x:TimeSpan">[Execution_time_subst]</OutArgument>
-                                          </Assign.To>
-                                          <Assign.Value>
-                                            <InArgument x:TypeArguments="x:TimeSpan">[End_Time-Start_Time]</InArgument>
-                                          </Assign.Value>
-                                        </Assign>
-                                        <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_33">
-                                          <Assign.To>
-                                            <OutArgument x:TypeArguments="x:String">[Execution_time]</OutArgument>
-                                          </Assign.To>
-                                          <Assign.Value>
-                                            <InArgument x:TypeArguments="x:String">[Execution_time_subst.ToString("hh\:mm\:ss")]</InArgument>
-                                          </Assign.Value>
-                                        </Assign>
-                                        <ui:AppendLine DisplayName="Append Line escreve a ultima linha do log" Encoding="utf-8" FileName="[&quot;\Logs\log&quot;+Datetime.Now.toString(&quot;dd-MM-yyyy&quot;)+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="384,134.4" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&lt;br&gt;Processo finalizado às &lt;b&gt;&quot;+End_Time.toString(&quot;HH:mm:ss&quot;)+&quot;&lt;/b&gt; (Tempo de execução: &quot;+ Execution_time+&quot;)&quot;+Environment.Newline+Environment.Newline+&quot;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" />
-                                        <ui:ReadTextFile Content="[email_body]" DisplayName="Read Text File cria o corpo do email a enviar a partir do log" FileName="[&quot;\Logs\log&quot;+Datetime.Now.toString(&quot;dd-MM-yyyy&quot;)+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="384,80.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-                                        <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[email_body]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="384,146.4" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="True" IsDraft="False" Subject="[email_subject]" To="[emailpath]">
-                                          <ui:SendOutlookMail.Files>
-                                            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
-                                          </ui:SendOutlookMail.Files>
-                                        </ui:SendOutlookMail>
+                                        <If sap:VirtualizedContainerService.HintSize="569.6,1084" sap2010:WorkflowViewState.IdRef="If_12">
+                                          <If.Then>
+                                            <Sequence sap:VirtualizedContainerService.HintSize="425.6,934.4" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                                              <Sequence.Variables>
+                                                <Variable x:TypeArguments="s:DateTime" Name="End_Time" />
+                                                <Variable x:TypeArguments="x:String" Name="email_subject" />
+                                                <Variable x:TypeArguments="x:TimeSpan" Name="Execution_time_subst" />
+                                                <Variable x:TypeArguments="x:String" Name="Execution_time" />
+                                                <Variable x:TypeArguments="x:String" Name="email_body" />
+                                              </Sequence.Variables>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_28">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="s:DateTime">[End_Time]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="s:DateTime">[DateTime.now]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:String">[email_subject]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:String">Resultados da Execução</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_32">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:TimeSpan">[Execution_time_subst]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:TimeSpan">[End_Time-Start_Time]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_33">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:String">[Execution_time]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:String">[Execution_time_subst.ToString("hh\:mm\:ss")]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <ui:AppendLine DisplayName="Append Line escreve a ultima linha do log" Encoding="utf-8" FileName="[&quot;\Logs\log&quot;+Datetime.Now.toString(&quot;dd-MM-yyyy&quot;)+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="384,134.4" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&lt;br&gt;Processo finalizado às &lt;b&gt;&quot;+End_Time.toString(&quot;HH:mm:ss&quot;)+&quot;&lt;/b&gt; (Tempo de execução: &quot;+ Execution_time+&quot;)&quot;+Environment.Newline+Environment.Newline+&quot;&lt;/p&gt;&lt;/body&gt;&lt;html&gt;&quot;]" />
+                                              <ui:ReadTextFile Content="[email_body]" DisplayName="Read Text File cria o corpo do email a enviar a partir do log" FileName="[&quot;\Logs\log&quot;+Datetime.Now.toString(&quot;dd-MM-yyyy&quot;)+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="384,80.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+                                              <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[email_body]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="384,146.4" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="True" IsDraft="False" Subject="[email_subject]" To="[emailpath]">
+                                                <ui:SendOutlookMail.Files>
+                                                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                </ui:SendOutlookMail.Files>
+                                              </ui:SendOutlookMail>
+                                            </Sequence>
+                                          </If.Then>
+                                        </If>
                                       </Sequence>
-                                    </If.Then>
-                                  </If>
-                                  <TryCatch DisplayName="Try to close all aplications" sap:VirtualizedContainerService.HintSize="569.6,319.2" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                                    </ui:CommentOut.Body>
+                                  </ui:CommentOut>
+                                  <TryCatch DisplayName="Try to close all aplications" sap:VirtualizedContainerService.HintSize="646.4,319.2" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                                     <TryCatch.Try>
                                       <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CloseAllApplications workflow" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Framework\CloseAllApplications.xaml">
                                         <ui:InvokeWorkflowFile.Arguments>
