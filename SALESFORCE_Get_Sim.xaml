@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>606,1172</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>622,1920</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SALESFORCE_Get_Sim_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="25">
@@ -64,7 +64,7 @@
       <AssemblyReference>UiPath.Salesforce</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SALESFORCE_Get_Sim" sap:VirtualizedContainerService.HintSize="476,1007" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SALESFORCE_Get_Sim" sap:VirtualizedContainerService.HintSize="602,1740" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtSimulacoes" />
     </Sequence.Variables>
@@ -73,23 +73,125 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Início da extração das Simulações em Execução - Covid19.&quot;]" />
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Attach Browser 'Casos Covid19 Simulações em Execução'" sap:VirtualizedContainerService.HintSize="434,653" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="92854fe5b873b79e9bab046ca6e473ed" Selector="&lt;html title='Casos: Início ~ Salesforce *' /&gt;">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="560,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Início da extração das Simulações em Execução - Covid19.&quot;]" />
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Attach Browser 'Casos Covid19 Simulações em Execução'" sap:VirtualizedContainerService.HintSize="560,1386" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="26a13df72befecf6eb2d3b4af0216a95" Selector="&lt;html title='Casos:* ~ Salesforce - Unlimited Edition' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,507" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="526,1240" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="dtResult" />
+              <Variable x:TypeArguments="x:Boolean" Name="existsText" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[dtSimulacoes]" DisplayName="Extract Structured Data 'Casos Simulacao'" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='tr'/&gt;&lt;/row&gt;&lt;column exact='1' name='Nº Contrato Cliente' attr='text'&gt;&lt;webctrl tag='td' class=&quot;x-grid3-col x-grid3-cell x-grid3-td-00N2o000006Fh3M &quot;/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='span' idx='1' /&gt;&lt;/column&gt;&lt;column exact='1' name='URL' attr='href'&gt;&lt;webctrl tag='td' class=&quot;x-grid3-col x-grid3-cell x-grid3-td-CASES_CASE_NUMBER &quot;/&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;/column&gt;&lt;column exact='1' name='Qtd Diferimentos' attr='text'&gt;&lt;webctrl tag='td' class=&quot;x-grid3-col x-grid3-cell x-grid3-td-00N2o000006Fh40 &quot;/&gt;&lt;webctrl tag='div' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100" SimulateClick="True">
+            <ui:TextExists FormattedText="{x:Null}" DisplayName="Text Exists 'SELECT  00B2o00000AjKgc...'" sap:VirtualizedContainerService.HintSize="484,134" sap2010:WorkflowViewState.IdRef="TextExists_1" Occurrence="1" Result="[existsText]" Text="DO-Covid19 -Simulação em Execução">
+              <ui:TextExists.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="a73f03b7fa4182b130c3e79500305b8d" Selector="&lt;webctrl tag='SELECT' aaname='*Modo de exibição:' /&gt;" TimeoutMS="3000">
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TextExists.Target>
+            </ui:TextExists>
+            <If Condition="[existsText]" sap:VirtualizedContainerService.HintSize="484,281" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Else>
+                <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  00B2o00000AjKnE...'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="SelectItem_1" Item="DO-Covid19 -Simulação em Execução">
+                  <ui:SelectItem.Items>
+                    <scg:List x:TypeArguments="x:String" Capacity="50">
+                      <x:String>AfterSales - Casos aguarda relacionado</x:String>
+                      <x:String>AfterSales - Casos devolvidos</x:String>
+                      <x:String>AfterSales - Casos em aprovação</x:String>
+                      <x:String>AfterSales - Casos em execução</x:String>
+                      <x:String>AfterSales - Casos em execução_Clientes</x:String>
+                      <x:String>AfterSales - Casos em tratamento</x:String>
+                      <x:String>AfterSales - Casos Fechados</x:String>
+                      <x:String>AfterSales - Casos novos</x:String>
+                      <x:String>AfterSales - Casos Rejeitados</x:String>
+                      <x:String>AfterSales - Meus casos abertos</x:String>
+                      <x:String>AfterSales - Meus casos fechados</x:String>
+                      <x:String>Casos Exibidos Recentemente</x:String>
+                      <x:String>CL - Atualização de dados</x:String>
+                      <x:String>DO - Covid1</x:String>
+                      <x:String>DO - Covid19</x:String>
+                      <x:String>DO-Covid19-Aguarda Conferência Maio</x:String>
+                      <x:String>DO - Covid19 -Aguarda Formalização</x:String>
+                      <x:String>DO - Covid19 - Aguarda Simulação_ABRIL</x:String>
+                      <x:String>DO - Covid19 - Aguarda Simulação_MAIO</x:String>
+                      <x:String>DO - Covid19 - Devolvidos</x:String>
+                      <x:String>DO - Covid19 - Fechados_Sucess</x:String>
+                      <x:String>DO - Covid19 - Novo</x:String>
+                      <x:String>DO - Covid19 - Para Execução</x:String>
+                      <x:String>DO - Covid19 - Processo Incompleto</x:String>
+                      <x:String>DO - Covid19 - Processo Incompleto_ABR</x:String>
+                      <x:String>DO - Covid19 - Reaberto</x:String>
+                      <x:String>DO-Covid19 -Simulação em Execução</x:String>
+                      <x:String>DO - Covid19 - Simulação em Execução_ANA</x:String>
+                      <x:String>DO-Covid19 -Simulação em Execução_JOANA</x:String>
+                      <x:String>DO - Covid19 - Simulações enviadas</x:String>
+                      <x:String>Escalão A-Transversal (DCR)</x:String>
+                      <x:String>Escalão A-Transversal (DO)</x:String>
+                      <x:String>Escalão B-Transversal (DCR)</x:String>
+                      <x:String>Escalão B-Transversal (DO)</x:String>
+                      <x:String>Escalão C-Transversal (DCR)</x:String>
+                      <x:String>Escalão C-Transversal (DO)</x:String>
+                      <x:String>Escalão D-Transversal (DCR)</x:String>
+                      <x:String>Escalão D-Transversal (DO)</x:String>
+                      <x:String>Escalão E-Transversal (DCR)</x:String>
+                      <x:String>Escalão E-Transversal (DO)</x:String>
+                      <x:String>Escalão F-Transversal (DCR)</x:String>
+                      <x:String>Escalão F-Transversal (DO)</x:String>
+                      <x:String>GDPR - AG</x:String>
+                      <x:String>GDPR - DAC</x:String>
+                      <x:String>GDPR - DPO</x:String>
+                      <x:String>GDPR - Todos</x:String>
+                      <x:String>Moratória Covid-19</x:String>
+                      <x:String>Venda de Seguros</x:String>
+                      <x:String>Venda Seguros - Ind aguarda conferência</x:String>
+                      <x:String>Venda Seguros - Meus aguarda conferência</x:String>
+                    </scg:List>
+                  </ui:SelectItem.Items>
+                  <ui:SelectItem.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5076c4a9312d264084c18de7d507dcd2" Selector="&lt;webctrl tag='SELECT' aaname='*Modo de exibição:' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:SelectItem.Target>
+                </ui:SelectItem>
+              </If.Else>
+            </If>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT'" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="a478fc9e49beb6bdda86cb54cf849968" Selector="&lt;webctrl name='go' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[dtSimulacoes]" DisplayName="Extract Structured Data 'Casos Simulacao'" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='tr'/&gt;&lt;/row&gt;&lt;column exact='1' name='Nº Contrato Cliente' attr='text'&gt;&lt;webctrl tag='td' class=&quot;x-grid3-col x-grid3-cell x-grid3-td-00N2o000006Fh3M &quot;/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='span' idx='1' /&gt;&lt;/column&gt;&lt;column exact='1' name='URL' attr='href'&gt;&lt;webctrl tag='td' class=&quot;x-grid3-col x-grid3-cell x-grid3-td-CASES_CASE_NUMBER &quot;/&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;/column&gt;&lt;column exact='1' name='Qtd Diferimentos' attr='text'&gt;&lt;webctrl tag='td' class=&quot;x-grid3-col x-grid3-cell x-grid3-td-00N2o000006Fh40 &quot;/&gt;&lt;webctrl tag='div' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100" SimulateClick="True">
               <ui:ExtractData.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="bb9752b72af88a3b2bf31d9556a1b14a" Selector="&lt;webctrl parentid='bodyTable' tag='TBODY' parentclass='outer' /&gt;" WaitForReady="COMPLETE">
                   <ui:Target.TimeoutMS>
@@ -98,28 +200,35 @@
                 </ui:Target>
               </ui:ExtractData.Target>
             </ui:ExtractData>
-            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtSimulacoes]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="334,207" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtSimulacoes]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="484,299" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                   </ActivityAction.Argument>
-                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:Object">[row("URL")]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:Object">[in_URL + row("URL").ToString]</InArgument>
-                    </Assign.Value>
-                  </Assign>
+                  <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[row("URL")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">[in_URL + row("URL").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
                 </ActivityAction>
               </ui:ForEachRow.Body>
             </ui:ForEachRow>
-            <ui:BulkAddQueueItems TimeoutMS="{x:Null}" DisplayName="Bulk Add Queue Items" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="BulkAddQueueItems_1" QueueItemsDataTable="[dtSimulacoes]" QueueName="DO – Covid19 - Simulação em Execução" Result="[dtResult]" />
+            <ui:BulkAddQueueItems TimeoutMS="{x:Null}" DisplayName="Bulk Add Queue Items" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="BulkAddQueueItems_1" QueueItemsDataTable="[dtSimulacoes]" QueueName="DO - Covid19 - Simulação em Execução" Result="[dtResult]" />
           </Sequence>
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Início da extração das Simulações em Execução - Covid19.&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="560,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Início da extração das Simulações em Execução - Covid19.&quot;]" />
   </Sequence>
 </Activity>
