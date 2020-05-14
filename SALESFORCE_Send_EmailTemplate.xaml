@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_Attachments="[{&quot;Anexo\Images\Extracted\DIF1.jpg&quot;,&quot;Anexo\Images\Extracted\DIF2.jpg&quot;,&quot;Anexo\Images\Extracted\CUT.jpg&quot;}]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:i="clr-namespace:ImageResizer;assembly=ImageResizer" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/word" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:swf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_Attachments="[{&quot;Anexo\Images\Extracted\DIF1.jpg&quot;,&quot;Anexo\Images\Extracted\DIF2.jpg&quot;,&quot;Anexo\Images\Extracted\CUT.jpg&quot;}]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/word" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:swf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_TransactionItem" Type="InArgument(s:String[])" />
     <x:Property Name="in_Attachments" Type="InArgument(s:String[])" />
@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1081,4592</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1081,7277</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="22">
@@ -57,7 +57,7 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Redireciociona-mento para a página de edição de email, formação do email atráves da manipulação dum ficheiro word local. Template encontra-se na diretoria indicada na variável defaultTemplatePath. Colagem das imagens no editor do browser. Envio do mail.&#xA;&#xA;In: Página de caso de um cliente.&#xA;Out. Envio de email." DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="1061,4492" sap2010:WorkflowViewState.IdRef="Sequence_12">
+  <Sequence sap2010:Annotation.AnnotationText="Redireciociona-mento para a página de edição de email, formação do email atráves da manipulação dum ficheiro word local. Template encontra-se na diretoria indicada na variável defaultTemplatePath. Colagem das imagens no editor do browser. Envio do mail.&#xA;&#xA;In: Página de caso de um cliente.&#xA;Out. Envio de email." DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="1061,7177" sap2010:WorkflowViewState.IdRef="Sequence_12">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="existsHTMLchange" />
       <Variable x:TypeArguments="ui:Image" Name="screenshot" />
@@ -76,9 +76,9 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1019,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Início do envio do mail no salesforce.&quot;]" />
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1019,4182" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1019,6867" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="981,3955" sap2010:WorkflowViewState.IdRef="Sequence_105">
+        <Sequence sap:VirtualizedContainerService.HintSize="981,6640" sap2010:WorkflowViewState.IdRef="Sequence_105">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="extractedPath" />
           </Sequence.Variables>
@@ -348,14 +348,14 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:BrowserScope>
-          <Sequence DisplayName="Colar Imagens" sap:VirtualizedContainerService.HintSize="939,1804" sap2010:WorkflowViewState.IdRef="Sequence_73">
+          <Sequence DisplayName="Colar Imagens" sap:VirtualizedContainerService.HintSize="939,4489" sap2010:WorkflowViewState.IdRef="Sequence_73">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[dif1FileExists]" DisplayName="If DIF1 File Exists" sap:VirtualizedContainerService.HintSize="897,1530" sap2010:WorkflowViewState.IdRef="If_6">
+            <If Condition="[dif1FileExists]" DisplayName="If DIF1 File Exists" sap:VirtualizedContainerService.HintSize="897,1439" sap2010:WorkflowViewState.IdRef="If_6">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -363,13 +363,13 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="476,1382" sap2010:WorkflowViewState.IdRef="Sequence_81">
+                <Sequence sap:VirtualizedContainerService.HintSize="476,1291" sap2010:WorkflowViewState.IdRef="Sequence_81">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Copy da imagem" sap:VirtualizedContainerService.HintSize="434,712" sap2010:WorkflowViewState.IdRef="Sequence_92">
+                  <Sequence DisplayName="Copy da imagem" sap:VirtualizedContainerService.HintSize="434,621" sap2010:WorkflowViewState.IdRef="Sequence_92">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="outputImageDIF1" />
                       <Variable x:TypeArguments="ui:GenericValue" Name="inputImageDIF1" />
@@ -380,31 +380,6 @@
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-                      <ui:CommentOut.Body>
-                        <Sequence DisplayName="Atividades Ignoradas" sap:VirtualizedContainerService.HintSize="376,213" sap2010:WorkflowViewState.IdRef="Sequence_106">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:LoadImage DisplayName="Load Image" FileName="[in_Attachments(0)]" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="LoadImage_2" Image="[loadedImage]" />
-                          <i:ImageResizer DisplayName="Image resizer" FilePath="[toSendImagesPath(0)]" Height="101" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ImageResizer_1" Image="[loadedImage]" Width="567">
-                            <i:ImageResizer.FileName>
-                              <InArgument x:TypeArguments="x:String">
-                                <Literal x:TypeArguments="x:String" Value="" />
-                              </InArgument>
-                            </i:ImageResizer.FileName>
-                          </i:ImageResizer>
-                        </Sequence>
-                      </ui:CommentOut.Body>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </ui:CommentOut>
                     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                       <ui:MultipleAssign.AssignOperations>
                         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
@@ -543,21 +518,21 @@
                 </Sequence>
               </If.Else>
             </If>
-            <If Condition="[dif2FileExists]" DisplayName="If DIF2 File Exists" sap:VirtualizedContainerService.HintSize="897,51" sap2010:WorkflowViewState.IdRef="If_9">
+            <If Condition="[dif2FileExists]" DisplayName="If DIF2 File Exists" sap:VirtualizedContainerService.HintSize="897,1439" sap2010:WorkflowViewState.IdRef="If_9">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="476,1382" sap2010:WorkflowViewState.IdRef="Sequence_97">
+                <Sequence sap:VirtualizedContainerService.HintSize="476,1291" sap2010:WorkflowViewState.IdRef="Sequence_97">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Copy da imagem" sap:VirtualizedContainerService.HintSize="434,712" sap2010:WorkflowViewState.IdRef="Sequence_95">
+                  <Sequence DisplayName="Copy da imagem" sap:VirtualizedContainerService.HintSize="434,621" sap2010:WorkflowViewState.IdRef="Sequence_95">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="ui:GenericValue" Name="outputImageDIF2" />
                       <Variable x:TypeArguments="ui:GenericValue" Name="inputImageDIF2" />
@@ -568,31 +543,6 @@
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-                      <ui:CommentOut.Body>
-                        <Sequence DisplayName="Atividades Ignoradas" sap:VirtualizedContainerService.HintSize="376,213" sap2010:WorkflowViewState.IdRef="Sequence_107">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:LoadImage DisplayName="Load Image" FileName="[in_Attachments(1)]" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="LoadImage_4" Image="[loadedImage]" />
-                          <i:ImageResizer DisplayName="Image resizer" FilePath="[toSendImagesPath(1)]" Height="101" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ImageResizer_2" Image="[loadedImage]" Width="567">
-                            <i:ImageResizer.FileName>
-                              <InArgument x:TypeArguments="x:String">
-                                <Literal x:TypeArguments="x:String" Value="" />
-                              </InArgument>
-                            </i:ImageResizer.FileName>
-                          </i:ImageResizer>
-                        </Sequence>
-                      </ui:CommentOut.Body>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </ui:CommentOut>
                     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                       <ui:MultipleAssign.AssignOperations>
                         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
@@ -731,21 +681,21 @@
                 </Sequence>
               </If.Else>
             </If>
-            <If Condition="[cutFileExists]" DisplayName="If CUT File Exists" sap:VirtualizedContainerService.HintSize="897,51" sap2010:WorkflowViewState.IdRef="If_10">
+            <If Condition="[cutFileExists]" DisplayName="If CUT File Exists" sap:VirtualizedContainerService.HintSize="897,1439" sap2010:WorkflowViewState.IdRef="If_10">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="476,1382" sap2010:WorkflowViewState.IdRef="Sequence_100">
+                <Sequence sap:VirtualizedContainerService.HintSize="476,1291" sap2010:WorkflowViewState.IdRef="Sequence_100">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Copy da imagem" sap:VirtualizedContainerService.HintSize="434,712" sap2010:WorkflowViewState.IdRef="Sequence_98">
+                  <Sequence DisplayName="Copy da imagem" sap:VirtualizedContainerService.HintSize="434,621" sap2010:WorkflowViewState.IdRef="Sequence_98">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="ui:GenericValue" Name="outputImageCUT" />
                       <Variable x:TypeArguments="ui:GenericValue" Name="inputImageCUT" />
@@ -756,31 +706,6 @@
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="CommentOut_3">
-                      <ui:CommentOut.Body>
-                        <Sequence DisplayName="Atividades Ignoradas" sap:VirtualizedContainerService.HintSize="376,213" sap2010:WorkflowViewState.IdRef="Sequence_108">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:LoadImage DisplayName="Load Image" FileName="[in_Attachments(2)]" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="LoadImage_6" Image="[loadedImage]" />
-                          <i:ImageResizer DisplayName="Image resizer" FilePath="[toSendImagesPath(2)]" Height="101" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ImageResizer_3" Image="[loadedImage]" Width="567">
-                            <i:ImageResizer.FileName>
-                              <InArgument x:TypeArguments="x:String">
-                                <Literal x:TypeArguments="x:String" Value="" />
-                              </InArgument>
-                            </i:ImageResizer.FileName>
-                          </i:ImageResizer>
-                        </Sequence>
-                      </ui:CommentOut.Body>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </ui:CommentOut>
                     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
                       <ui:MultipleAssign.AssignOperations>
                         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
